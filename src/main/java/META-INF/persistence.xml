@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="QuanLyKhachSan_Server">
+	    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	    <class>model.ChiTietDVPK</class>
+        <class>model.ChiTietDV</class>
+        <class>model.DichVu</class>
+        <class>model.HoaDonDV</class>
+        <class>model.HoaDonPhong</class>
+        <class>model.KhachHang</class>
+        <class>model.LoaiPhong</class>
+        <class>model.Phong</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver"
+                      value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+                      
+            <property name="javax.persistence.jdbc.dialect"
+                      value="org.hibernate.dialect.SQLServer2012Dialect" />
+
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:sqlserver://localhost:1433;databaseName=qlks" />
+
+            <property name="javax.persistence.jdbc.user"
+                      value="sa" />
+
+            <property name="javax.persistence.jdbc.password"
+                      value="sapassword" />
+
+            <property name="hibernate.show_sql"
+                      value="true" />
+
+            <property name="hibernate.hbm2ddl.auto"
+                      value="create-drop" />
+        </properties>
+	</persistence-unit>
+</persistence>

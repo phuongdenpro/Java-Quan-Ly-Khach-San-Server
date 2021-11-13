@@ -2,18 +2,39 @@ package model;
 
 import java.io.Serializable;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class HoaDonDV implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int maHDDV;
 	private int tinhTrang;
-	private Date ngayGioDat;
-	private KhachHang khachHang;
+	@Column(name = "NgayGioLap", columnDefinition = "Datetime")
+	private LocalDateTime ngayGioDat;
+	
+	@OneToMany(mappedBy = "hoaDonDV")
+	private List<ChiTietDV> dsChiTietDV;
+	
+	@ManyToOne
+	@JoinColumn(name="MaPhong")
+	private Phong phong;
 
-	public HoaDonDV(int maHDDV, Date ngayGioDat, KhachHang khachHang) {
+	public HoaDonDV(int maHDDV, LocalDateTime ngayGioDat, Phong phong) {
 		this.maHDDV = maHDDV;
 		this.ngayGioDat = ngayGioDat;
-		this.khachHang = khachHang;
+		this.phong = phong;
 	}
 
 	public HoaDonDV() {
@@ -21,11 +42,11 @@ public class HoaDonDV implements Serializable {
 	}
 	
 
-	public HoaDonDV(int maHDDV, KhachHang khachHang, Date ngayGioDat, int tinhTrang) {
+	public HoaDonDV(int maHDDV, Phong phong, LocalDateTime ngayGioDat, int tinhTrang) {
 		this.maHDDV = maHDDV;
 		this.ngayGioDat = ngayGioDat;
 		this.tinhTrang = tinhTrang;
-		this.khachHang = khachHang;
+		this.phong = phong;
 	}
 
 
@@ -45,20 +66,20 @@ public class HoaDonDV implements Serializable {
 		this.maHDDV = maHDDV;
 	}
 
-	public Date getNgayGioDat() {
+	public LocalDateTime getNgayGioDat() {
 		return ngayGioDat;
 	}
 
-	public void setNgayGioDat(Date ngayGioDat) {
+	public void setNgayGioDat(LocalDateTime ngayGioDat) {
 		this.ngayGioDat = ngayGioDat;
 	}
 
-	public KhachHang getKhachHang() {
-		return khachHang;
+	public Phong getKhachHang() {
+		return phong;
 	}
 
-	public void setKhachHang(KhachHang khachHang) {
-		this.khachHang = khachHang;
+	public void setKhachHang(Phong phong) {
+		this.phong = phong;
 	}
 
 	@Override

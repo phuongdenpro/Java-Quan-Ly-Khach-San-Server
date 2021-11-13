@@ -3,14 +3,39 @@ package model;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Phong implements Serializable{
+	@Id
     private String maPhong;
     private int sucChua;
     private int soGiuong;
     private String viTri;
     private int tinhTrang;
+    
+    @ManyToOne
+	@JoinColumn(name="maLoaiPhong")
     private LoaiPhong loaiPhong;
+    
+    @OneToMany(mappedBy = "phong")
+	private List<HoaDonDV> dsHoaDonDV;
+    
+    @OneToMany(mappedBy = "phong")
+	private List<HoaDonDV> dsHoaDon;
+    
+    public Phong() {
+	
+	}
 
     public Phong(String maPhong, int sucChua, int soGiuong, String viTri, int tinhTrang, LoaiPhong loaiPhong) {
         this.maPhong = maPhong;

@@ -3,13 +3,30 @@ package model;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class DichVu implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int maDV;
 	private String tenDV;
 	private double donGia;
+	
+	@OneToMany(mappedBy = "dichVu")
+	private List<ChiTietDV> dsChiTietDV;
 
+	public DichVu() {
+	
+	}
+	
 	public DichVu(int maDV) {
 		this(maDV, "Chưa cập nhật", 0.0);
 	}

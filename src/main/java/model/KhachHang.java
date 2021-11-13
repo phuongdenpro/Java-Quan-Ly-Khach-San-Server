@@ -2,14 +2,32 @@ package model;
 
 import java.io.Serializable;
 import java.sql.*;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class KhachHang implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int maKH;
 	private String tenKH;
 	private String cmnd;
 	private Date ngayHetHan;
 	private String loaiKH;
 	private int soLanDatPhong = 0;
+	
+	@OneToMany(mappedBy = "khachHang")
+	private List<HoaDonPhong> dsHoaDon;
+	
+	public KhachHang() {
+	
+	}
 
 	public KhachHang(int maKH, String tenKH, String cmnd, Date ngayHetHan, String loaiKH, int soLanDatPhong) {
 		setMaKH(maKH);

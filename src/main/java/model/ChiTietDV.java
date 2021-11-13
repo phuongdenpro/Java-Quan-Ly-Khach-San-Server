@@ -3,12 +3,31 @@ package model;
 import java.io.Serializable;
 import java.sql.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@IdClass(ChiTietDVPK.class)
 public class ChiTietDV implements Serializable{
+	@Id
+	@ManyToOne
+	@JoinColumn(name="MaDV")
 	private DichVu dichVu;
-	private HoaDonDV hoaDonDV;
-	private int soLuong;
-	private Date ngayGioDat;
 	
+	@Id
+	@ManyToOne
+	@JoinColumn(name="MaHDDV")
+	private HoaDonDV hoaDonDV;
+	@Id
+	private Date ngayGioDat;
+	private int soLuong;
+	
+	public ChiTietDV() {
+
+	}
 
 	public ChiTietDV(int soLuong, HoaDonDV hoaDonDV, DichVu dichVu) {
 

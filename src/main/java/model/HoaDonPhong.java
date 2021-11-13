@@ -2,18 +2,40 @@ package model;
 
 import java.io.Serializable;
 import java.sql.*;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class HoaDonPhong implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private int maHD;
     private int tinhTrang;
-    private Date ngayGioNhan;
-    private Date ngayGioTra;
+    @Column(columnDefinition = "Datetime")
+    private LocalDateTime ngayGioNhan;
+    @Column(columnDefinition = "Datetime")
+    private LocalDateTime ngayGioTra;
 
+    @ManyToOne
+	@JoinColumn(name="MaPhong")
     private Phong phong;
+    
+    @ManyToOne
+	@JoinColumn(name="MaKH")
     private KhachHang khachHang;
+    
+    public HoaDonPhong() {
+	
+	}
 
-    public HoaDonPhong(int maHD, int tinhTrang, Date ngayGioNhan, Date ngayGioTra, Phong phong, KhachHang khachHang) {
+    public HoaDonPhong(int maHD, int tinhTrang, LocalDateTime ngayGioNhan, LocalDateTime ngayGioTra, Phong phong, KhachHang khachHang) {
         this.maHD = maHD;
         this.tinhTrang = tinhTrang;
         this.ngayGioNhan = ngayGioNhan;
@@ -38,19 +60,19 @@ public class HoaDonPhong implements Serializable {
         this.maHD = maHD;
     }
 
-    public Date getNgayGioNhan() {
+    public LocalDateTime getNgayGioNhan() {
         return ngayGioNhan;
     }
 
-    public void setNgayGioNhan(Date ngayGioNhan) {
+    public void setNgayGioNhan(LocalDateTime ngayGioNhan) {
         this.ngayGioNhan = ngayGioNhan;
     }
 
-    public Date getNgayGioTra() {
+    public LocalDateTime getNgayGioTra() {
         return ngayGioTra;
     }
 
-    public void setNgayGioTra(Date ngayGioTra) {
+    public void setNgayGioTra(LocalDateTime ngayGioTra) {
         this.ngayGioTra = ngayGioTra;
     }
 
@@ -70,21 +92,21 @@ public class HoaDonPhong implements Serializable {
         this.khachHang = khachHang;
     }
 
-    public double tinhTongTien(){
-        double tongTien = phong.getLoaiPhong().getDonGia()*tinhSoNgay();
-        System.out.println(tongTien);
-        tongTien = tongTien - khachHang.getSoLanDatPhong()*3*(tongTien/100);
-        return tongTien;
-    }
+//    public double tinhTongTien(){
+//        double tongTien = phong.getLoaiPhong().getDonGia()*tinhSoNgay();
+//        System.out.println(tongTien);
+//        tongTien = tongTien - khachHang.getSoLanDatPhong()*3*(tongTien/100);
+//        return tongTien;
+//    }
 
-    public int tinhSoNgay(){
-        // System.out.print(ngayGioTra.getTime());
-        // System.out.print(ngayGioNhan.getTime());
-        long d = ngayGioTra.getTime() - ngayGioNhan.getTime();
-        System.out.println(ngayGioTra.compareTo(ngayGioNhan));
-        
-        return (int)d/86400000 + 1;
-    }
+//    public int tinhSoNgay(){
+//        // System.out.print(ngayGioTra.getTime());
+//        // System.out.print(ngayGioNhan.getTime());
+//        long d = ngayGioTra.getTime() - ngayGioNhan.getTime();
+//        System.out.println(ngayGioTra.compareTo(ngayGioNhan));
+//        
+//        return (int)d/86400000 + 1;
+//    }
     
     public int compareDate(Date d1, Date d2) {
         if (d1.toString().equals(d2.toString()))

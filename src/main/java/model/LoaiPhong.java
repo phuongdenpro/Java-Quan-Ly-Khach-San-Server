@@ -3,12 +3,30 @@ package model;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class LoaiPhong implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private int maLoaiPhong;
     private String tenLoaiPhong;
     private Double donGia;
+	 
+	@OneToMany(mappedBy = "loaiPhong")
+	private List<Phong> dsPhong;
 
+	public LoaiPhong() {
+	
+	}
+	
     public LoaiPhong(int maLoaiPhong, String tenLoaiPhong, Double donGia) {
         this.maLoaiPhong = maLoaiPhong;
         this.tenLoaiPhong = tenLoaiPhong;
