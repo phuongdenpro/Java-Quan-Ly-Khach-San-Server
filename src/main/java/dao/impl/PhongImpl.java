@@ -1,11 +1,16 @@
 package dao.impl;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import dao.AbstractDao;
 import dao.PhongDao;
 
 public class PhongImpl extends AbstractDao implements PhongDao {
+
+	public PhongImpl() throws RemoteException {
+		super();
+	}
 
 	@Override
 	public List<model.Phong> getPhongTrong() {

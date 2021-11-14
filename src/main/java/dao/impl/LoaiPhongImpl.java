@@ -1,11 +1,16 @@
 package dao.impl;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import dao.AbstractDao;
 import dao.LoaiPhongDao;
 
 public class LoaiPhongImpl extends AbstractDao implements LoaiPhongDao {
+
+	public LoaiPhongImpl() throws RemoteException {
+		super();
+	}
 
 	@Override
 	public List<model.LoaiPhong> getDSLoaiPhong() {

@@ -1,11 +1,16 @@
 package dao.impl;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import dao.AbstractDao;
 import dao.DichVuDao;
 
 public class DichVuImpl extends AbstractDao implements DichVuDao{
+
+	public DichVuImpl() throws RemoteException {
+		super();
+	}
 
 	@Override
 	public List<model.DichVu> getListDichVu() {

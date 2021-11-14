@@ -1,5 +1,6 @@
 package dao.impl;
 
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 
@@ -7,6 +8,10 @@ import dao.AbstractDao;
 import dao.HoaDonDVDao;
 
 public class HoaDonDVImpl extends AbstractDao implements HoaDonDVDao{
+
+	public HoaDonDVImpl() throws RemoteException {
+		super();
+	}
 
 	@Override
 	public List<model.HoaDonDV> getListHDDV() {

@@ -1,11 +1,16 @@
 package dao.impl;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import dao.AbstractDao;
 import dao.KhachHangDao;
 
 public class KhachHangImpl extends AbstractDao implements KhachHangDao {
+
+	public KhachHangImpl() throws RemoteException {
+		super();
+	}
 
 	@Override
 	public List<model.KhachHang> getListKhachHang() {

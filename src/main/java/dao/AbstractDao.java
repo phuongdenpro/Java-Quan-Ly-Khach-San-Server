@@ -1,11 +1,15 @@
 package dao;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class AbstractDao {
+public class AbstractDao extends UnicastRemoteObject{
+	
+
 	private EntityManagerFactory factory;
 	public String ChiTietDV = "ChiTietDV";
 	public String DichVu = "DichVu";
@@ -15,8 +19,10 @@ public class AbstractDao {
 	public String LoaiPhong = "LoaiPhong";
 	public String Phong = "Phong";
 
-	public AbstractDao() {
-		factory = Persistence.createEntityManagerFactory("DHKTPM15A_JPA_Hibernate_ORM");
+	protected AbstractDao() throws RemoteException {
+		super();
+		
+		factory = Persistence.createEntityManagerFactory("QuanLyKhachSan_Server");
 	}
 	
 	public boolean them(Object obj, Class<?> classname) {

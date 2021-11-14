@@ -1,5 +1,6 @@
 package dao.impl;
 
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 
@@ -7,6 +8,10 @@ import dao.AbstractDao;
 import dao.ChiTietDVDao;
 
 public class ChiTietDVImpl extends AbstractDao implements ChiTietDVDao{
+
+	public ChiTietDVImpl() throws RemoteException {
+		super();
+	}
 
 	@Override
 	public List<model.ChiTietDV> getListChiTietDVByDate(Date tuNgay, Date denNgay) {
