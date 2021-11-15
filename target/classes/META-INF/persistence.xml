@@ -10,6 +10,8 @@
         <class>model.KhachHang</class>
         <class>model.LoaiPhong</class>
         <class>model.Phong</class>
+        <class>model.ChiTietHoaDonPhong</class>
+        <class>model.ChiTietHoaDonPhongPK</class>
         <properties>
             <property name="javax.persistence.jdbc.driver"
                       value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />

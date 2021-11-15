@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class HoaDonPhong implements Serializable {
@@ -23,24 +25,24 @@ public class HoaDonPhong implements Serializable {
     @Column(columnDefinition = "Datetime")
     private LocalDateTime ngayGioTra;
 
-    @ManyToOne
-	@JoinColumn(name="MaPhong")
-    private Phong phong;
+    @OneToMany(mappedBy = "hoaDonPhong")
+	private List<ChiTietHoaDonPhong> dsChiTietHoaDonPhong;
     
     @ManyToOne
 	@JoinColumn(name="MaKH")
     private KhachHang khachHang;
     
+    
+    
     public HoaDonPhong() {
 	
 	}
 
-    public HoaDonPhong(int maHD, int tinhTrang, LocalDateTime ngayGioNhan, LocalDateTime ngayGioTra, Phong phong, KhachHang khachHang) {
+    public HoaDonPhong(int maHD, int tinhTrang, LocalDateTime ngayGioNhan, LocalDateTime ngayGioTra, KhachHang khachHang) {
         this.maHD = maHD;
         this.tinhTrang = tinhTrang;
         this.ngayGioNhan = ngayGioNhan;
         this.ngayGioTra = ngayGioTra;
-        this.phong = phong;
         this.khachHang = khachHang;
     }
     
@@ -76,14 +78,6 @@ public class HoaDonPhong implements Serializable {
         this.ngayGioTra = ngayGioTra;
     }
 
-    public Phong getPhong() {
-        return phong;
-    }
-
-    public void setPhong(Phong phong) {
-        this.phong = phong;
-    }
-
     public KhachHang getKhachHang() {
         return khachHang;
     }
@@ -91,30 +85,40 @@ public class HoaDonPhong implements Serializable {
     public void setKhachHang(KhachHang khachHang) {
         this.khachHang = khachHang;
     }
-
-//    public double tinhTongTien(){
-//        double tongTien = phong.getLoaiPhong().getDonGia()*tinhSoNgay();
-//        System.out.println(tongTien);
-//        tongTien = tongTien - khachHang.getSoLanDatPhong()*3*(tongTien/100);
-//        return tongTien;
-//    }
-
-//    public int tinhSoNgay(){
-//        // System.out.print(ngayGioTra.getTime());
-//        // System.out.print(ngayGioNhan.getTime());
-//        long d = ngayGioTra.getTime() - ngayGioNhan.getTime();
-//        System.out.println(ngayGioTra.compareTo(ngayGioNhan));
-//        
-//        return (int)d/86400000 + 1;
-//    }
     
-    public int compareDate(Date d1, Date d2) {
-        if (d1.toString().equals(d2.toString()))
-            return 0;
+    public List<ChiTietHoaDonPhong> getDsChiTietHoaDonPhong() {
+		return dsChiTietHoaDonPhong;
+	}
 
-        if (d1.before(d2))
-            return -1;
+	public void setDsChiTietHoaDonPhong(List<ChiTietHoaDonPhong> dsChiTietHoaDonPhong) {
+		this.dsChiTietHoaDonPhong = dsChiTietHoaDonPhong;
+	}
 
-        return 1;
-    }
+//	public int compareDate(Date d1, Date d2) {
+//        if (d1.toString().equals(d2.toString()))
+//            return 0;
+//
+//        if (d1.before(d2))
+//            return -1;
+//
+//        return 1;
+//    }
+	
+    
+
+//  public double tinhTongTien(){
+//      double tongTien = phong.getLoaiPhong().getDonGia()*tinhSoNgay();
+//      System.out.println(tongTien);
+//      tongTien = tongTien - khachHang.getSoLanDatPhong()*3*(tongTien/100);
+//      return tongTien;
+//  }
+
+//  public int tinhSoNgay(){
+//      // System.out.print(ngayGioTra.getTime());
+//      // System.out.print(ngayGioNhan.getTime());
+//      long d = ngayGioTra.getTime() - ngayGioNhan.getTime();
+//      System.out.println(ngayGioTra.compareTo(ngayGioNhan));
+//      
+//      return (int)d/86400000 + 1;
+//  }
 }

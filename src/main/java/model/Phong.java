@@ -31,7 +31,7 @@ public class Phong implements Serializable{
 	private List<HoaDonDV> dsHoaDonDV;
     
     @OneToMany(mappedBy = "phong")
-	private List<HoaDonDV> dsHoaDon;
+	private List<ChiTietHoaDonPhong> dsChiTietHoaDonPhong;
     
     public Phong() {
 	
