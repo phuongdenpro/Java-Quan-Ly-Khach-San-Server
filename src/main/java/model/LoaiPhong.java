@@ -32,6 +32,12 @@ public class LoaiPhong implements Serializable {
         this.tenLoaiPhong = tenLoaiPhong;
         setDonGia(donGia);
     }
+    
+    public LoaiPhong(String tenLoaiPhong, Double donGia) {
+        this.maLoaiPhong = maLoaiPhong;
+        this.tenLoaiPhong = tenLoaiPhong;
+        setDonGia(donGia);
+    }
 
 
     public int getMaLoaiPhong() {

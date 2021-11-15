@@ -1,19 +1,27 @@
 package dao.impl;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import dao.AbstractDao;
 import dao.LoaiPhongDao;
+import model.LoaiPhong;
 
 public class LoaiPhongImpl extends AbstractDao implements LoaiPhongDao {
 
 	public LoaiPhongImpl() throws RemoteException {
-		super();
+//		super();
 	}
 
 	@Override
-	public List<model.LoaiPhong> getDSLoaiPhong() {
+	public int test() throws RemoteException {
+		
+		return 0;
+	}
+	
+	@Override
+	public List<model.LoaiPhong> getDSLoaiPhong() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -31,21 +39,20 @@ public class LoaiPhongImpl extends AbstractDao implements LoaiPhongDao {
 	}
 
 	@Override
-	public boolean themLoaiPhong(model.LoaiPhong loaiPhong) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean themLoaiPhong(LoaiPhong loaiPhong) throws RemoteException{
+		return them(loaiPhong);
 	}
 
 	@Override
 	public boolean xoaLoaiPhong(int maLoaiPhong) {
-		// TODO Auto-generated method stub
-		return false;
+//		LoaiPhong lp = new LoaiPhong();
+//		lp.setMaLoaiPhong(maLoaiPhong);
+		return xoa(maLoaiPhong, LoaiPhong.class);
 	}
 
 	@Override
-	public boolean capNhatLoaiPhong(model.LoaiPhong loaiPhong) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean capNhatLoaiPhong(LoaiPhong loaiPhong) {
+		return capNhat(loaiPhong);
 	}
 
 	@Override
@@ -53,5 +60,7 @@ public class LoaiPhongImpl extends AbstractDao implements LoaiPhongDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }

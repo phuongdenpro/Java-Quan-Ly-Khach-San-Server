@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.AbstractDao;
 import dao.PhongDao;
+import model.Phong;
 
 public class PhongImpl extends AbstractDao implements PhongDao {
 
@@ -37,8 +38,8 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 	}
 
 	@Override
-	public boolean themPhong(model.Phong phong) {
-		// TODO Auto-generated method stub
+	public boolean themPhong(Phong phong) throws RemoteException{
+		them(phong);
 		return false;
 	}
 
@@ -49,7 +50,7 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 	}
 
 	@Override
-	public boolean suaPhong(model.Phong phong) {
+	public boolean suaPhong(Phong phong) {
 		// TODO Auto-generated method stub
 		return false;
 	}

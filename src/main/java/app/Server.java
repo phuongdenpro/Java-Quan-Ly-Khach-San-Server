@@ -31,7 +31,7 @@ import dao.impl.PhongImpl;
 
 public class Server extends JFrame{
 	private JTextArea taConsole;
-	private String ip = "192.168.1.124";
+	private String ip = "localhost";
 	private int port = 9991;
 	
 	public Server() throws NamingException, RemoteException {
