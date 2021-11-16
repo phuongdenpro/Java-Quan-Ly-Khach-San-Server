@@ -39,8 +39,8 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 
 	@Override
 	public boolean themPhong(Phong phong) throws RemoteException{
-		them(phong);
-		return false;
+		
+		return them(phong);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 	@Override
 	public boolean suaPhong(Phong phong) {
 		// TODO Auto-generated method stub
-		return false;
+		return capNhat(phong);
 	}
 
 	@Override
