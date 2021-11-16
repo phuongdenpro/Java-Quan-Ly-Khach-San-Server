@@ -7,7 +7,6 @@ import java.util.List;
 import model.LoaiPhong;
 
 public interface LoaiPhongDao extends Remote {
-	public int test() throws RemoteException; 
 	public List<LoaiPhong> getDSLoaiPhong() throws RemoteException;
 	public LoaiPhong getLoaiPhongByMa(int maLoaiPhong) throws RemoteException;
 	public List<LoaiPhong> getLoaiPhongByName(String name) throws RemoteException;

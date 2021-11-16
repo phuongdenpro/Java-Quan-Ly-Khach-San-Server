@@ -20,6 +20,7 @@ public class Phong implements Serializable{
     private String maPhong;
     private int sucChua;
     private int soGiuong;
+    @Column(columnDefinition = "NVARCHAR(50)")
     private String viTri;
     private int tinhTrang;
     
@@ -27,8 +28,6 @@ public class Phong implements Serializable{
 	@JoinColumn(name="maLoaiPhong")
     private LoaiPhong loaiPhong;
     
-    @OneToMany(mappedBy = "phong")
-	private List<HoaDonDV> dsHoaDonDV;
     
     @OneToMany(mappedBy = "phong")
 	private List<ChiTietHoaDonPhong> dsChiTietHoaDonPhong;

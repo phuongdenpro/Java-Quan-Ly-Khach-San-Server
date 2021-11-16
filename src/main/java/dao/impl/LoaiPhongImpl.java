@@ -7,6 +7,7 @@ import java.util.List;
 import dao.AbstractDao;
 import dao.LoaiPhongDao;
 import model.LoaiPhong;
+import model.Phong;
 
 public class LoaiPhongImpl extends AbstractDao implements LoaiPhongDao {
 
@@ -15,25 +16,19 @@ public class LoaiPhongImpl extends AbstractDao implements LoaiPhongDao {
 	}
 
 	@Override
-	public int test() throws RemoteException {
-		
-		return 0;
-	}
-	
-	@Override
-	public List<model.LoaiPhong> getDSLoaiPhong() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LoaiPhong> getDSLoaiPhong() throws RemoteException {
+		String sql = "select * from LoaiPhong";
+		return (List<LoaiPhong>) getList(sql, LoaiPhong.class);
 	}
 
 	@Override
-	public model.LoaiPhong getLoaiPhongByMa(int maLoaiPhong) {
-		// TODO Auto-generated method stub
-		return null;
+	public LoaiPhong getLoaiPhongByMa(int maLoaiPhong) {
+		String sql = "select * from LoaiPhong where maLoaiPhong = "+maLoaiPhong;
+		return (LoaiPhong) getSingle(sql, LoaiPhong.class);
 	}
 
 	@Override
-	public List<model.LoaiPhong> getLoaiPhongByName(String name) {
+	public List<LoaiPhong> getLoaiPhongByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -45,8 +40,6 @@ public class LoaiPhongImpl extends AbstractDao implements LoaiPhongDao {
 
 	@Override
 	public boolean xoaLoaiPhong(int maLoaiPhong) {
-//		LoaiPhong lp = new LoaiPhong();
-//		lp.setMaLoaiPhong(maLoaiPhong);
 		return xoa(maLoaiPhong, LoaiPhong.class);
 	}
 
@@ -57,7 +50,7 @@ public class LoaiPhongImpl extends AbstractDao implements LoaiPhongDao {
 
 	@Override
 	public int getSoLuongPhongByMaLoaiPhong(int maLoaiPhong) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

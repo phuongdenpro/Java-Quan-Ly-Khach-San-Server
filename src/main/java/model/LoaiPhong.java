@@ -17,6 +17,7 @@ public class LoaiPhong implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private int maLoaiPhong;
+	@Column(columnDefinition = "NVARCHAR(50)")
     private String tenLoaiPhong;
     private Double donGia;
 	 
@@ -66,8 +67,18 @@ public class LoaiPhong implements Serializable {
             donGia = 0.0;
         this.donGia = donGia;
     }
+    
+    public int getID() {
+		return this.maLoaiPhong;
+	}
 
     @Override
+	public String toString() {
+		return "LoaiPhong [maLoaiPhong=" + maLoaiPhong + ", tenLoaiPhong=" + tenLoaiPhong + ", donGia=" + donGia
+				+ ", dsPhong=" + dsPhong + "]";
+	}
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

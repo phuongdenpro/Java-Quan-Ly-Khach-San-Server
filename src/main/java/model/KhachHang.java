@@ -16,32 +16,44 @@ public class KhachHang implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int maKH;
+	@Column(columnDefinition = "NVARCHAR(50)")
 	private String tenKH;
 	private String cmnd;
+	private String soDienThoai;
 	private Date ngayHetHan;
+	@Column(columnDefinition = "NVARCHAR(50)")
 	private String loaiKH;
 	private int soLanDatPhong = 0;
 	
 	@OneToMany(mappedBy = "khachHang")
 	private List<HoaDonPhong> dsHoaDon;
 	
+	@OneToMany(mappedBy = "khachHang")
+	private List<HoaDonDV> dsHoaDonDV;
+	
 	public KhachHang() {
 	
 	}
 
-	public KhachHang(int maKH, String tenKH, String cmnd, Date ngayHetHan, String loaiKH, int soLanDatPhong) {
+	public KhachHang(int maKH, String tenKH, String cmnd, String soDienThoai, Date ngayHetHan, String loaiKH, int soLanDatPhong) {
 		setMaKH(maKH);
 		setTenKH(tenKH);
 		setCmnd(cmnd);
+		this.soDienThoai = soDienThoai;
 		this.ngayHetHan = ngayHetHan;
 		this.loaiKH = loaiKH;
 		setSoLanDatPhong(soLanDatPhong);
 	}
-
-
-	public KhachHang(int maKH, String tenKH) {
-		this(maKH, tenKH, "Chưa cập nhật", null, "VN", 0);
+	
+	public KhachHang(String tenKH, String cmnd, String soDienThoai, Date ngayHetHan, String loaiKH) {
+		setTenKH(tenKH);
+		setCmnd(cmnd);
+		this.soDienThoai = soDienThoai;
+		this.ngayHetHan = ngayHetHan;
+		this.loaiKH = loaiKH;
+		setSoLanDatPhong(0);
 	}
+
 
 
 	public int getMaKH() {
@@ -101,6 +113,25 @@ public class KhachHang implements Serializable {
 	}
 
 	
+
+	public String getSoDienThoai() {
+		return soDienThoai;
+	}
+
+	public void setSoDienThoai(String soDienThoai) {
+		this.soDienThoai = soDienThoai;
+	}
+	
+	public int getID() {
+		return this.maKH;
+	}
+
+	@Override
+	public String toString() {
+		return "KhachHang [maKH=" + maKH + ", tenKH=" + tenKH + ", cmnd=" + cmnd + ", soDienThoai=" + soDienThoai
+				+ ", ngayHetHan=" + ngayHetHan + ", loaiKH=" + loaiKH + ", soLanDatPhong=" + soLanDatPhong
+				+ ", dsHoaDon=" + dsHoaDon + "]";
+	}
 
 	@Override
 	public int hashCode() {

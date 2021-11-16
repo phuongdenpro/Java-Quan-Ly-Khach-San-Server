@@ -21,20 +21,20 @@ public class HoaDonDV implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int maHDDV;
 	private int tinhTrang;
-	@Column(name = "NgayGioLap", columnDefinition = "Datetime")
-	private LocalDateTime ngayGioDat;
+	@Column(name = "NgayGioLap")
+	private Date ngayGioDat;
 	
 	@OneToMany(mappedBy = "hoaDonDV")
 	private List<ChiTietDV> dsChiTietDV;
 	
 	@ManyToOne
-	@JoinColumn(name="MaPhong")
-	private Phong phong;
+	@JoinColumn(name="MaKH")
+	private KhachHang khachHang;
 
-	public HoaDonDV(int maHDDV, LocalDateTime ngayGioDat, Phong phong) {
+	public HoaDonDV(int maHDDV, Date ngayGioDat, KhachHang khachHang) {
 		this.maHDDV = maHDDV;
 		this.ngayGioDat = ngayGioDat;
-		this.phong = phong;
+		this.khachHang = khachHang;
 	}
 
 	public HoaDonDV() {
@@ -42,11 +42,11 @@ public class HoaDonDV implements Serializable {
 	}
 	
 
-	public HoaDonDV(int maHDDV, Phong phong, LocalDateTime ngayGioDat, int tinhTrang) {
+	public HoaDonDV(int maHDDV, KhachHang khachHang, Date ngayGioDat, int tinhTrang) {
 		this.maHDDV = maHDDV;
 		this.ngayGioDat = ngayGioDat;
 		this.tinhTrang = tinhTrang;
-		this.phong = phong;
+		this.khachHang = khachHang;
 	}
 
 
@@ -66,20 +66,24 @@ public class HoaDonDV implements Serializable {
 		this.maHDDV = maHDDV;
 	}
 
-	public LocalDateTime getNgayGioDat() {
+	public Date getNgayGioDat() {
 		return ngayGioDat;
 	}
 
-	public void setNgayGioDat(LocalDateTime ngayGioDat) {
+	public void setNgayGioDat(Date ngayGioDat) {
 		this.ngayGioDat = ngayGioDat;
 	}
 
-	public Phong getKhachHang() {
-		return phong;
+	public KhachHang getKhachHang() {
+		return khachHang;
 	}
 
-	public void setKhachHang(Phong phong) {
-		this.phong = phong;
+	public void setKhachHang(KhachHang khachHang) {
+		this.khachHang = khachHang;
+	}
+	
+	public int getID() {
+		return this.maHDDV;
 	}
 
 	@Override
@@ -103,6 +107,7 @@ public class HoaDonDV implements Serializable {
 			return false;
 		return true;
 	}
+
 
 
 }

@@ -9,25 +9,33 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import model.DichVu;
+import model.HoaDonDV;
+import model.HoaDonPhong;
+import model.KhachHang;
+import model.LoaiPhong;
+
+
 
 public class AbstractDao extends UnicastRemoteObject{
 	
 
 	private EntityManagerFactory factory;
 	protected EntityManager em;
-	public String ChiTietDV = "ChiTietDV";
-	public String DichVu = "DichVu";
-	public String HoaDonDV= "HoaDonDV";
-	public String HoaDonPhong = "HoaDonPhong";
-	public String KhachHang = "KhachHang";
-	public String LoaiPhong = "LoaiPhong";
-	public String Phong = "Phong";
+	public String[] DICHVU = {"DichVu", "maDV"};
+	public String[] HOADONDV= {"HoaDonDV", "maHDDV"};
+	public String[] HOADONPHONG = {"HoaDonPhong", "maHD"};
+	public String[] KHACHHANG = {"KhachHang", "maKH"};
+	public String[] LOAIPHONG = {"LoaiPhong", "maLoaiPhong"};
+	public String[] PHONG = {"Phong", "maPhong"};
 
 	protected AbstractDao() throws RemoteException {
 		super();
 		
 		factory = Persistence.createEntityManagerFactory("QuanLyKhachSan_Server");
+	
 		em = factory.createEntityManager();
+		
 	}
 	
 	public boolean them(Object obj) {
@@ -41,6 +49,7 @@ public class AbstractDao extends UnicastRemoteObject{
 		}catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
+			
 		}
 
 		return false;
@@ -83,17 +92,24 @@ public class AbstractDao extends UnicastRemoteObject{
 		return true;
 	}
 	
-	public List<Class<?>> getList(String sql, Class<?> classname){
-		return null;
+	public List<?> getList(String sql, Class<?> classname){
+		return em.createNativeQuery(sql, classname)
+				.getResultList();
 	}
 	
-	public Class<?> getSingle(String sql, Class<?> classname){
-		return null;
+	public Object getSingle(String sql, Class<?> classname){
+		return em.createNativeQuery(sql, classname)
+				.getSingleResult();
 	}
 	
-	public int getLastestId(String tableName) {
-//		
-		return 0;
+	public int getLastestId(String[] table, Class<?> classname) {
+		String sql = "SELECT top 1 "+ table[1] +" FROM dbo."+ table[0] +" order by " + table[1] + " desc";
+		Object obj = em.createNativeQuery(sql).getSingleResult();
+		return (Integer) obj;
 	}
 	
+	public static void main(String[] args) throws RemoteException {
+		AbstractDao abstractDao = new AbstractDao();
+		System.out.println(abstractDao.getLastestId(abstractDao.HOADONPHONG, model.HoaDonPhong.class));
+	}
 }

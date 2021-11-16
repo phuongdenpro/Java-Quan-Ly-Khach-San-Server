@@ -6,6 +6,8 @@ import java.util.List;
 
 import dao.AbstractDao;
 import dao.HoaDonDVDao;
+import model.HoaDonDV;
+import model.HoaDonPhong;
 
 public class HoaDonDVImpl extends AbstractDao implements HoaDonDVDao{
 
@@ -21,8 +23,8 @@ public class HoaDonDVImpl extends AbstractDao implements HoaDonDVDao{
 
 	@Override
 	public model.HoaDonDV getHDDVbyMaHDDV(int maHDDV) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from HoaDonDV where maHDDV = "+maHDDV;
+		return (HoaDonDV) getSingle(sql, HoaDonDV.class);
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class HoaDonDVImpl extends AbstractDao implements HoaDonDVDao{
 	@Override
 	public boolean capNhatHoaDonDV(model.HoaDonDV hd) {
 		// TODO Auto-generated method stub
-		return false;
+		return capNhat(hd);
 	}
 
 	@Override

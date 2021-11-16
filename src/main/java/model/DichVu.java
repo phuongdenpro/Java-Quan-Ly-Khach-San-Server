@@ -17,6 +17,7 @@ public class DichVu implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int maDV;
+	@Column(columnDefinition = "NVARCHAR(50)")
 	private String tenDV;
 	private double donGia;
 	
@@ -70,6 +71,10 @@ public class DichVu implements Serializable {
 			donGia = 0.0;
 		this.donGia = donGia;
 	}
+	
+	public int getID() {
+		return this.maDV;
+	}
 
 
 	@Override
@@ -92,6 +97,12 @@ public class DichVu implements Serializable {
 		if (maDV != other.maDV)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "DichVu [maDV=" + maDV + ", tenDV=" + tenDV + ", donGia=" + donGia + ", dsChiTietDV=" + dsChiTietDV
+				+ "]";
 	}
 
 }

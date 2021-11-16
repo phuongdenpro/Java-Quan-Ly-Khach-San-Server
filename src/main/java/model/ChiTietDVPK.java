@@ -10,7 +10,6 @@ import javax.persistence.Embeddable;
 public class ChiTietDVPK implements Serializable {
 	private DichVu dichVu;
 	private HoaDonDV hoaDonDV;
-	private Date ngayGioDat;
 	
 	public ChiTietDVPK() {
 	
@@ -18,7 +17,7 @@ public class ChiTietDVPK implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dichVu, hoaDonDV, ngayGioDat);
+		return Objects.hash(dichVu, hoaDonDV);
 	}
 
 	@Override
@@ -30,9 +29,8 @@ public class ChiTietDVPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ChiTietDVPK other = (ChiTietDVPK) obj;
-		return Objects.equals(dichVu, other.dichVu) && Objects.equals(hoaDonDV, other.hoaDonDV)
-				&& Objects.equals(ngayGioDat, other.ngayGioDat);
+		return Objects.equals(dichVu, other.dichVu) && Objects.equals(hoaDonDV, other.hoaDonDV);
 	}
-	
+
 	
 }

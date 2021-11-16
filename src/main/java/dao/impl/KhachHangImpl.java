@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.AbstractDao;
 import dao.KhachHangDao;
+import model.KhachHang;
 
 public class KhachHangImpl extends AbstractDao implements KhachHangDao {
 
@@ -13,9 +14,9 @@ public class KhachHangImpl extends AbstractDao implements KhachHangDao {
 	}
 
 	@Override
-	public List<model.KhachHang> getListKhachHang() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<KhachHang> getListKhachHang() {
+		String sql = "select * from KhachHang";
+		return (List<KhachHang>) getList(sql, KhachHang.class);
 	}
 
 	@Override
@@ -26,14 +27,13 @@ public class KhachHangImpl extends AbstractDao implements KhachHangDao {
 
 	@Override
 	public model.KhachHang getKhachHangByMaKH(int maKH) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "Select * from KhachHang where maKH = "+maKH;
+		return (KhachHang) getSingle(sql, KhachHang.class);
 	}
 
 	@Override
 	public boolean themKhachHang(model.KhachHang kh) {
-		// TODO Auto-generated method stub
-		return false;
+		return them(kh);
 	}
 
 	@Override

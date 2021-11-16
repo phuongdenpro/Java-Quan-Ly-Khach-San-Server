@@ -2,9 +2,9 @@ package model;
 
 import java.io.Serializable;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,24 +13,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import utils.Ngay;
 
 @Entity
 public class HoaDonPhong implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maHD;
     private int tinhTrang;
-    @Column(columnDefinition = "Datetime")
-    private LocalDateTime ngayGioNhan;
-    @Column(columnDefinition = "Datetime")
-    private LocalDateTime ngayGioTra;
+    private Date ngayGioNhan;
+    private Date ngayGioTra;
 
-    @OneToMany(mappedBy = "hoaDonPhong")
-	private List<ChiTietHoaDonPhong> dsChiTietHoaDonPhong;
-    
     @ManyToOne
 	@JoinColumn(name="MaKH")
     private KhachHang khachHang;
+    
+    @OneToMany(mappedBy = "hoaDonPhong")
+	private List<ChiTietHoaDonPhong> dsChiTietHoaDonPhong;
+    
+    
     
     
     
@@ -38,12 +39,19 @@ public class HoaDonPhong implements Serializable {
 	
 	}
 
-    public HoaDonPhong(int maHD, int tinhTrang, LocalDateTime ngayGioNhan, LocalDateTime ngayGioTra, KhachHang khachHang) {
+    public HoaDonPhong(int maHD, int tinhTrang, Date ngayGioNhan, Date ngayGioTra, KhachHang khachHang) {
         this.maHD = maHD;
         this.tinhTrang = tinhTrang;
         this.ngayGioNhan = ngayGioNhan;
         this.ngayGioTra = ngayGioTra;
         this.khachHang = khachHang;
+    }
+    
+    public HoaDonPhong(Date ngayGioNhan, Date ngayGioTra, KhachHang khachHang, List<ChiTietHoaDonPhong> dscthdp) {
+        this.ngayGioNhan = ngayGioNhan;
+        this.ngayGioTra = ngayGioTra;
+        this.khachHang = khachHang;
+        this.dsChiTietHoaDonPhong = dscthdp;
     }
     
     public int getTinhTrang() {
@@ -62,19 +70,19 @@ public class HoaDonPhong implements Serializable {
         this.maHD = maHD;
     }
 
-    public LocalDateTime getNgayGioNhan() {
+    public Date getNgayGioNhan() {
         return ngayGioNhan;
     }
 
-    public void setNgayGioNhan(LocalDateTime ngayGioNhan) {
+    public void setNgayGioNhan(Date ngayGioNhan) {
         this.ngayGioNhan = ngayGioNhan;
     }
 
-    public LocalDateTime getNgayGioTra() {
+    public Date getNgayGioTra() {
         return ngayGioTra;
     }
 
-    public void setNgayGioTra(LocalDateTime ngayGioTra) {
+    public void setNgayGioTra(Date ngayGioTra) {
         this.ngayGioTra = ngayGioTra;
     }
 
@@ -92,6 +100,17 @@ public class HoaDonPhong implements Serializable {
 
 	public void setDsChiTietHoaDonPhong(List<ChiTietHoaDonPhong> dsChiTietHoaDonPhong) {
 		this.dsChiTietHoaDonPhong = dsChiTietHoaDonPhong;
+	}
+	
+	public int getID() {
+		return this.maHD;
+	}
+
+	@Override
+	public String toString() {
+		return "HoaDonPhong [maHD=" + maHD + ", tinhTrang=" + tinhTrang + ", ngayGioNhan=" + ngayGioNhan
+				+ ", ngayGioTra=" + ngayGioTra + ", dsChiTietHoaDonPhong=" + dsChiTietHoaDonPhong + ", khachHang="
+				+ khachHang + "]";
 	}
 
 //	public int compareDate(Date d1, Date d2) {

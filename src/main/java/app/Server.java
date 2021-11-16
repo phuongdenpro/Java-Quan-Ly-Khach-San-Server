@@ -14,13 +14,16 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import dao.ChiTietDVDao;
+import dao.ChiTietHoaDonPhongDao;
 import dao.DichVuDao;
 import dao.HoaDonDVDao;
 import dao.HoaDonPhongDao;
 import dao.KhachHangDao;
 import dao.LoaiPhongDao;
 import dao.PhongDao;
+
 import dao.impl.ChiTietDVImpl;
+import dao.impl.ChiTietHoaDonPhongImpl;
 import dao.impl.DichVuImpl;
 import dao.impl.HoaDonDVImpl;
 import dao.impl.HoaDonPhongImpl;
@@ -56,6 +59,9 @@ public class Server extends JFrame{
 		
 		ChiTietDVDao chiTietDVDao = new ChiTietDVImpl();
 		context.bind("rmi://"+ ip +":"+ port +"/ChiTietDV", chiTietDVDao);
+		
+		ChiTietHoaDonPhongDao chiTietHDPDao = new ChiTietHoaDonPhongImpl();
+		context.bind("rmi://"+ ip +":"+ port +"/ChiTietHoaDonPhong", chiTietHDPDao);
 		
 		DichVuDao dichVuDao = new DichVuImpl();
 		context.bind("rmi://"+ ip +":"+ port +"/DichVu", dichVuDao);

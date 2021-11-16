@@ -2,10 +2,17 @@ package dao.impl;
 
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityTransaction;
 
 import dao.AbstractDao;
 import dao.HoaDonPhongDao;
+import model.ChiTietHoaDonPhong;
+import model.HoaDonPhong;
+import model.KhachHang;
+import utils.Ngay;
 
 public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 
@@ -39,8 +46,46 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 
 	@Override
 	public boolean themHoaDonPhong(model.HoaDonPhong hdp) {
-		// TODO Auto-generated method stub
-		return false;
+		EntityTransaction tr = em.getTransaction();
+//		try {
+			tr.begin();
+			
+			if(em.find(KhachHang.class, hdp.getKhachHang().getMaKH()) == null) {
+//				kh
+				em.persist(hdp.getKhachHang());
+				em.flush();
+			}
+			
+//			hdp
+			em.persist(hdp);
+//			em.flush();
+			
+			System.out.println(hdp.getMaHD());
+//			thêm cthd
+			hdp.getDsChiTietHoaDonPhong().forEach(cthdp -> {
+				
+				cthdp.setHoaDonPhong(hdp);
+//				em.persist(cthdp);
+				try {
+					new ChiTietHoaDonPhongImpl().themChiTietHDP(cthdp);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			});
+//			
+			tr.commit();
+
+			return true;
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//			tr.rollback();
+//			
+//		}
+		
+//		return false;
 	}
 
 	@Override
@@ -50,9 +95,8 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	}
 
 	@Override
-	public boolean capNhatTinhTrang(int maHD, int tinhTrang) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean capNhatHoaDonPhong(HoaDonPhong hdp) {
+		return capNhat(hdp);
 	}
 
 	@Override
@@ -65,6 +109,22 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	public List<model.HoaDonPhong> getListHDPByTinhTrang() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public static void main(String[] args) throws RemoteException {
+		KhachHang kh = new KhachHangImpl().getKhachHangByMaKH(1);
+		
+		List<ChiTietHoaDonPhong> dscthdp = new ArrayList<ChiTietHoaDonPhong>();
+		dscthdp.add(new ChiTietHoaDonPhong(new PhongImpl().getPhongByMaPhong("P101")));
+		HoaDonPhong hdp = new HoaDonPhong(Ngay.homNay(), Ngay.homNay(), kh, dscthdp);
+		HoaDonPhongDao hoaDonPhongDao = new HoaDonPhongImpl();
+		System.out.println(hoaDonPhongDao.themHoaDonPhong(hdp));
+	}
+
+	@Override
+	public HoaDonPhong getHDPbyMaHD(int maHD) throws RemoteException {
+		String sql = "select * from HoaDonPhong where maHD = "+maHD;
+		return (HoaDonPhong) getSingle(sql, HoaDonPhong.class);
 	}
 
 }

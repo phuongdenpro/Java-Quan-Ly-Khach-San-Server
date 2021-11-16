@@ -21,20 +21,20 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 
 	@Override
 	public List<model.Phong> getPhongByMaLoaiPhong(int maLoaiPhong) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from Phong where maLoaiPhong = " + maLoaiPhong;
+		return (List<Phong>) getList(sql, Phong.class);
 	}
 
 	@Override
 	public model.Phong getPhongByMaPhong(String maPhong) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from Phong where maPhong like '" + maPhong +"'";
+		return (Phong) getSingle(sql, Phong.class);
 	}
 
 	@Override
-	public List<model.Phong> getListPhong() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Phong> getListPhong() {
+		String sql = "select * from Phong";
+		return (List<Phong>) getList(sql, Phong.class);
 	}
 
 	@Override

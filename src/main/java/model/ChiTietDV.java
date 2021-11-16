@@ -21,15 +21,9 @@ public class ChiTietDV implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="MaHDDV")
 	private HoaDonDV hoaDonDV;
-	@Id
-	private Date ngayGioDat;
 	private int soLuong;
 	
 	public ChiTietDV() {
-
-	}
-
-	public ChiTietDV(int soLuong, HoaDonDV hoaDonDV, DichVu dichVu) {
 
 	}
 
@@ -39,20 +33,12 @@ public class ChiTietDV implements Serializable{
 
 	}
 	
-	public ChiTietDV(int soLuong, Date ngayGioDat, HoaDonDV hoaDonDV, DichVu dichVu) {
+	public ChiTietDV(int soLuong, HoaDonDV hoaDonDV, DichVu dichVu) {
 		setSoLuong(soLuong);
-		this.ngayGioDat = ngayGioDat;
 		this.hoaDonDV = hoaDonDV;
 		this.dichVu = dichVu;
 	}
-	
-	public Date getNgayGioDat() {
-		return ngayGioDat;
-	}
 
-	public void setNgayGioDat(Date ngayGioDat) {
-		this.ngayGioDat = ngayGioDat;
-	}
 
 
 	public DichVu getDichVu() {

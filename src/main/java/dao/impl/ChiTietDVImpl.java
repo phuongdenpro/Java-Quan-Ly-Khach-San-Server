@@ -6,6 +6,8 @@ import java.util.List;
 
 import dao.AbstractDao;
 import dao.ChiTietDVDao;
+import model.ChiTietDV;
+import model.ChiTietHoaDonPhong;
 
 public class ChiTietDVImpl extends AbstractDao implements ChiTietDVDao{
 
@@ -26,9 +28,10 @@ public class ChiTietDVImpl extends AbstractDao implements ChiTietDVDao{
 	}
 
 	@Override
-	public List<model.ChiTietDV> getListChiTietDVByMaHDDV(int maHDDV) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ChiTietDV> getListChiTietDVByMaHDDV(int maHDDV) {
+		String sql = "select * from ChiTietDV where maHDDV = " + maHDDV;
+		System.out.println(sql);
+		return (List<ChiTietDV>) getList(sql, ChiTietDV.class);
 	}
 
 	@Override
