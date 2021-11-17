@@ -1,10 +1,12 @@
 package dao.impl;
 
 import java.rmi.RemoteException;
+import java.sql.Date;
 import java.util.List;
 
 import dao.AbstractDao;
 import dao.PhongDao;
+import model.HoaDonPhong;
 import model.Phong;
 
 public class PhongImpl extends AbstractDao implements PhongDao {
@@ -74,9 +76,13 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 	}
 
 	@Override
-	public boolean kiemTraPhongTrong(String maPhong) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean kiemTraPhongTrong(String maPhong, Date d1, Date d2) throws RemoteException {
+		String sql = "select * from Phong";
+		List<HoaDonPhong> dshdp = new HoaDonPhongImpl().getListHDPDaDatHoacDangOByMaPhong(maPhong, d1, d2);
+		if(dshdp.size() == 0)
+			return true;
+		else 
+			return false;
 	}
 
 }

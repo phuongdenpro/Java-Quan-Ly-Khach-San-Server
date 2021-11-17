@@ -96,7 +96,7 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 
 	@Override
 	public model.HoaDonPhong getHDPbyMaPhong(String maPhong) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -120,6 +120,39 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	public HoaDonPhong getHDPbyMaHD(int maHD) throws RemoteException {
 		String sql = "select * from HoaDonPhong where maHD = "+maHD;
 		return (HoaDonPhong) getSingle(sql, HoaDonPhong.class);
+	}
+
+	@Override
+	public List<HoaDonPhong> getListHDPByMaPhong(String maPhong) throws RemoteException {
+		String sql = "select * \r\n"
+				+ "from HoaDonPhong as hdp\r\n"
+				+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+				+ "on hdp.maHD = cthdp.maHD\r\n"
+				+ "where maPhong like '"+ maPhong +"'";
+		return (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
+	}
+	
+	@Override
+	public List<HoaDonPhong> getListHDPByMaPhong(String maPhong, Date d1, Date d2) throws RemoteException {
+		String sql = "select * \r\n"
+				+ "from HoaDonPhong as hdp\r\n"
+				+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+				+ "on hdp.maHD = cthdp.maHD\r\n"
+				+ "where maPhong like '"+ maPhong +"' and not (ngayGioNhan > '"+ d2 +"' or ngayGioTra < '"+ d1 +"')";
+		System.out.println(sql);
+		return (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
+	}
+	
+
+	@Override
+	public List<HoaDonPhong> getListHDPDaDatHoacDangOByMaPhong(String maPhong, Date d1, Date d2) throws RemoteException {
+		String sql = "select * \r\n"
+				+ "from HoaDonPhong as hdp\r\n"
+				+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+				+ "on hdp.maHD = cthdp.maHD\r\n"
+				+ "where tinhTrang != 2 and maPhong like '"+ maPhong +"' and not (ngayGioNhan > '"+ d2 +"' or ngayGioTra < '"+ d1 +"')";
+		System.out.println(sql);
+		return (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
 	}
 
 }

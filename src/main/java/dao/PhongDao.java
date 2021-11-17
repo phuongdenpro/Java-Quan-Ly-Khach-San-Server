@@ -2,6 +2,7 @@ package dao;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.Date;
 import java.util.List;
 
 import model.KhachHang;
@@ -18,5 +19,5 @@ public interface PhongDao extends Remote {
 	public KhachHang getKHDangSuDungPhong(String maPhong) throws RemoteException;
 	public KhachHang getKHDaDatPhong(String maPhong) throws RemoteException; // đã đặt phòng tại thời điểm hiện tại
 	public boolean capNhatTinhTrangPhong(String MaPhong, int tinhTrang) throws RemoteException;
-	public boolean kiemTraPhongTrong(String maPhong) throws RemoteException; // kiểm tra xem phòng đó còn trống tại thời điểm hiện tại không
+	public boolean kiemTraPhongTrong(String maPhong, Date d1, Date d2) throws RemoteException; // kiểm tra xem phòng đó còn trống tại thời điểm đó không
 }
