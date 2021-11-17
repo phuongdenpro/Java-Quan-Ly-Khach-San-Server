@@ -47,7 +47,7 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	@Override
 	public boolean themHoaDonPhong(model.HoaDonPhong hdp) {
 		EntityTransaction tr = em.getTransaction();
-//		try {
+		try {
 			tr.begin();
 			
 			if(em.find(KhachHang.class, hdp.getKhachHang().getMaKH()) == null) {
@@ -57,35 +57,30 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 			}
 			
 //			hdp
-			em.persist(hdp);
-//			em.flush();
 			
+//			em.flush();
+			em.persist(hdp);
 			System.out.println(hdp.getMaHD());
 //			thêm cthd
-			hdp.getDsChiTietHoaDonPhong().forEach(cthdp -> {
-				
+			List<ChiTietHoaDonPhong> dscthdp = hdp.getDsChiTietHoaDonPhong();
+//			hdp.setDsChiTietHoaDonPhong(null);
+			em.clear();
+			dscthdp.forEach(cthdp -> {
 				cthdp.setHoaDonPhong(hdp);
-//				em.persist(cthdp);
-				try {
-					new ChiTietHoaDonPhongImpl().themChiTietHDP(cthdp);
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				em.merge(cthdp);
 				
 			});
-//			
+			em.flush();
 			tr.commit();
 
 			return true;
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//			tr.rollback();
-//			
-//		}
+		}catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+			
+		}
 		
-//		return false;
+		return false;
 	}
 
 	@Override

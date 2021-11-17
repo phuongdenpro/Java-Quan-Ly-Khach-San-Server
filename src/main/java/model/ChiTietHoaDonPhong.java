@@ -14,15 +14,14 @@ import javax.persistence.ManyToOne;
 public class ChiTietHoaDonPhong implements Serializable{
 
 	@Id
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name="MaPhong")
-	private Phong phong;
-	
-	@Id
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name="MaHD")
 	private HoaDonPhong hoaDonPhong;
 	
+	@Id
+	@ManyToOne
+	@JoinColumn(name="MaPhong")
+	private Phong phong;
 	
 	public ChiTietHoaDonPhong() {
 	

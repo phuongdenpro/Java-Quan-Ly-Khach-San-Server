@@ -15,11 +15,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class LoaiPhong implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maLoaiPhong;
 	@Column(columnDefinition = "NVARCHAR(50)")
     private String tenLoaiPhong;
-    private Double donGia;
+    private double donGia;
 	 
 	@OneToMany(mappedBy = "loaiPhong")
 	private List<Phong> dsPhong;
@@ -58,11 +58,11 @@ public class LoaiPhong implements Serializable {
         this.tenLoaiPhong = tenLoaiPhong;
     }
 
-    public Double getDonGia() {
+    public double getDonGia() {
         return donGia;
     }
 
-    public void setDonGia(Double donGia) {
+    public void setDonGia(double donGia) {
         if (donGia < 0)
             donGia = 0.0;
         this.donGia = donGia;

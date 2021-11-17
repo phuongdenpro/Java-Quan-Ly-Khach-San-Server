@@ -34,9 +34,9 @@ public class ChiTietHoaDonPhongImpl extends AbstractDao implements ChiTietHoaDon
 		
 		try {
 			tr.begin();
-			em.detach(cthdp.getHoaDonPhong());
+			em.merge(cthdp.getHoaDonPhong());
 			
-			em.detach(cthdp.getPhong());
+			em.merge(cthdp.getPhong());
 			em.persist(cthdp);
 			tr.commit();
 

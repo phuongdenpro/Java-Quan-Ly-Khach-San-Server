@@ -46,7 +46,7 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 	@Override
 	public boolean xoaPhong(String maPhong) {
 		// TODO Auto-generated method stub
-		return false;
+		return xoa(maPhong, Phong.class);
 	}
 
 	@Override

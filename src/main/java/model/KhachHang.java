@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class KhachHang implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int maKH;
 	@Column(columnDefinition = "NVARCHAR(50)")
 	private String tenKH;

@@ -72,7 +72,6 @@ public class AbstractDao extends UnicastRemoteObject{
 	
 	public boolean xoa(int id, Class<?> classname) {
 		EntityTransaction tr = em.getTransaction();
-		System.out.println(classname);
 		try {
 			tr.begin();
 
@@ -88,8 +87,19 @@ public class AbstractDao extends UnicastRemoteObject{
 	}
 	
 	public boolean xoa(String id, Class<?> classname) {
-		
-		return true;
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+
+			em.remove(em.find(classname, id));
+			tr.commit();
+
+			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return false;
 	}
 	
 	public List<?> getList(String sql, Class<?> classname){

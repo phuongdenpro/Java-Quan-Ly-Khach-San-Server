@@ -2,32 +2,32 @@ USE QLKS
 GO
 
 INSERT INTO dbo.KhachHang
-	(MaKH, tenKH, cmnd, soDienThoai, ngayHetHan, loaiKH, soLanDatPhong)
+	(tenKH, cmnd, soDienThoai, ngayHetHan, loaiKH, soLanDatPhong)
 VALUES
-	(1, N'Chí Phèo', N'123123123', '0987654321', '20230101', N'Việt Nam', 0),
-	(2, N'Xuân Tóc Đỏ', N'123123123', '0987654322', '20220501', N'Việt Nam', 0),
-	(3, N'Lão Hạc', N'123123123', '0987654333', '20230106', N'Việt Nam', 1),
-	(4, N'John Wick', N'123123123', '0987655555', '20240513', N'Nước ngoài', 0),
-	(5, N'Tony Stark', N'123123123', '0987654399', '20240206', N'Nước ngoài', 1)
+	(N'Chí Phèo', N'123123123', '0987654321', '20230101', N'Việt Nam', 0),
+	(N'Xuân Tóc Đỏ', N'123123123', '0987654322', '20220501', N'Việt Nam', 0),
+	(N'Lão Hạc', N'123123123', '0987654333', '20230106', N'Việt Nam', 1),
+	(N'John Wick', N'123123123', '0987655555', '20240513', N'Nước ngoài', 0),
+	(N'Tony Stark', N'123123123', '0987654399', '20240206', N'Nước ngoài', 1)
 GO
 
 -- Insert rows into table 'dbo.DichVu'
 INSERT INTO dbo.DichVu
-	(maDV, tenDV, donGia)
+	(tenDV, donGia)
 VALUES
-	(1, N'Bún bò Huế', 30000),
+	(N'Bún bò Huế', 30000),
 	-- Ăn uống
-	(2, N'Hũ tiếu gõ', 20000),
+	(N'Hũ tiếu gõ', 20000),
 	-- Ăn uống
-	(3, N'Mì 2 trứng', 17000),
-	(4, N'Gửi xe', 5000),
-	(5, N'Rửa xe', 30000),
-	(6, N'Giặt, ủi là', 20000),
-	(7, N'Xe đưa đón sân bay', 100000),
-	(8, N'Cho thuê xe tự lái', 120000),
-	(9, N'Trông trẻ', 30000),
-	(10, N'Spa', 300000),
-	(11, N'Đánh golf, tennis', 200000)
+	(N'Mì 2 trứng', 17000),
+	(N'Gửi xe', 5000),
+	(N'Rửa xe', 30000),
+	(N'Giặt, ủi là', 20000),
+	(N'Xe đưa đón sân bay', 100000),
+	(N'Cho thuê xe tự lái', 120000),
+	(N'Trông trẻ', 30000),
+	(N'Spa', 300000),
+	(N'Đánh golf, tennis', 200000)
 -- GO
 
 -- INSERT INTO dbo.HoaDonDV
@@ -51,10 +51,10 @@ VALUES
 -- GO
 
 INSERT INTO dbo.LoaiPhong
-	(MaLoaiPhong, TenLoaiPhong, donGia)
+	(TenLoaiPhong, donGia)
 VALUES
-	(1, N'Phòng đơn', 20000),
-	(2, N'Phòng đôi', 50000)
+	(N'Phòng đơn', 20000),
+	(N'Phòng đôi', 50000)
 GO
 
 INSERT INTO dbo.Phong
@@ -86,8 +86,8 @@ INSERT INTO dbo.HoaDonPhong (ngayGioNhan, ngayGioTra, tinhTrang, maKH)
 INSERT INTO dbo.ChiTietHoaDonPhong (maHD, maPhong) values(1, 'P101');
 INSERT INTO dbo.ChiTietHoaDonPhong (maHD, maPhong) values(1, 'P102');
 
-INSERT INTO dbo.HoaDonDV (maHDDV, ngayGioLap, tinhTrang, maKH)
-	values (1, '11-16-2021', 0, 1);
+INSERT INTO dbo.HoaDonDV (ngayGioLap, tinhTrang, maKH)
+	values ('11-16-2021', 0, 1);
 
 INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong) values(1, 1, 3);
 INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong) values(1, 2, 5);

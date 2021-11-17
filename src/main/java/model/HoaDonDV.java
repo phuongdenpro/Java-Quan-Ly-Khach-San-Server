@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class HoaDonDV implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int maHDDV;
 	private int tinhTrang;
 	@Column(name = "NgayGioLap")

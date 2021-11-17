@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class DichVu implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int maDV;
 	@Column(columnDefinition = "NVARCHAR(50)")
 	private String tenDV;
