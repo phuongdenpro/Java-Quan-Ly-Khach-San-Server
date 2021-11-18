@@ -16,14 +16,17 @@ import utils.Ngay;
 
 public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 
+	private String error;
+
+
 	public HoaDonPhongImpl() throws RemoteException {
 		super();
 	}
 
 	@Override
 	public List<model.HoaDonPhong> getListHoaDonPhong() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from HoaDonPhong";
+		return (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
 	}
 
 	@Override
@@ -90,7 +93,32 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	}
 
 	@Override
-	public boolean capNhatHoaDonPhong(HoaDonPhong hdp) {
+	public boolean capNhatHoaDonPhong(HoaDonPhong hdp) throws RemoteException {
+		
+		error = "";
+		List<ChiTietHoaDonPhong> dscthdp = new ChiTietHoaDonPhongImpl().getListChiTietHDPByMaHD(hdp.getMaHD());
+		
+		dscthdp.forEach(cthdp -> {
+			String sql = "select * \r\n"
+					+ "from HoaDonPhong as hdp\r\n"
+					+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+					+ "on hdp.maHD = cthdp.maHD\r\n"
+					+ "where tinhTrang != 2 and hdp.maHD != "+ hdp.getMaHD() +" and maPhong like '"+ cthdp.getPhong().getMaPhong() +"' and not (ngayGioNhan > '"+ hdp.getNgayGioTra() +"' or ngayGioTra < '"+ hdp.getNgayGioNhan() +"')";
+
+			int n = ((List<HoaDonPhong>) getList(sql, HoaDonPhong.class)).size();
+			if(n > 0) {
+				if(!error.equals("")) {
+					error += ", ";
+				}
+				error += cthdp.getPhong().getMaPhong();
+			}
+				
+		});
+		if(!error.equals("")) {
+			error = "Phòng: "+ error + " không trống trong thời điểm bạn chọn";
+			return false;
+		}
+		
 		return capNhat(hdp);
 	}
 
@@ -154,5 +182,19 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 		System.out.println(sql);
 		return (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
 	}
+	
+	@Override
+	public List<HoaDonPhong> timKiemHDP(String where_sql) throws RemoteException {
+		String sql = "select * \r\n"
+				+ "from HoaDonPhong\r\n"
+				+ "inner join KhachHang\r\n"
+				+ "on HoaDonPhong.maKH = KhachHang.maKH\r\n"
+				+ "where "+where_sql;
+		return (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
+	}
+	
 
+	public String getError() {
+		return this.error;
+	}
 }

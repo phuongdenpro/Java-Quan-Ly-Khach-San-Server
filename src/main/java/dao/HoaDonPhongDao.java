@@ -21,4 +21,6 @@ public interface HoaDonPhongDao extends Remote {
 	public List<HoaDonPhong> getListHDPByMaPhong(String maPhong) throws RemoteException;
 	public List<HoaDonPhong> getListHDPByMaPhong(String maPhong, Date d1, Date d2) throws RemoteException; 
 	public List<HoaDonPhong> getListHDPDaDatHoacDangOByMaPhong(String maPhong, Date d1, Date d2) throws RemoteException;
+	public List<HoaDonPhong> timKiemHDP(String where_sql) throws RemoteException;
+	public String getError() throws RemoteException;
 }
