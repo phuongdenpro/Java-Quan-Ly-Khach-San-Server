@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class HoaDonDV implements Serializable {
 	@Column(name = "NgayGioLap")
 	private Date ngayGioDat;
 	
-	@OneToMany(mappedBy = "hoaDonDV")
+	@OneToMany(mappedBy = "hoaDonDV", cascade = CascadeType.REMOVE)
 	private List<ChiTietDV> dsChiTietDV;
 	
 	@ManyToOne
@@ -48,7 +49,31 @@ public class HoaDonDV implements Serializable {
 		this.tinhTrang = tinhTrang;
 		this.khachHang = khachHang;
 	}
+	
+	public HoaDonDV(int maHDDV, KhachHang khachHang, Date ngayGioDat, List<ChiTietDV> dsChiTietDV) {
+		this.maHDDV = maHDDV;
+		this.ngayGioDat = ngayGioDat;
+		this.khachHang = khachHang;
+		this.dsChiTietDV = dsChiTietDV;
+	}
+	
+	public HoaDonDV(KhachHang khachHang, Date ngayGioDat, List<ChiTietDV> dsChiTietDV) {
+		this.ngayGioDat = ngayGioDat;
+		this.tinhTrang = 0;
+		this.khachHang = khachHang;
+		this.dsChiTietDV = dsChiTietDV;
+	}
+	
+	
 
+
+	public List<ChiTietDV> getDsChiTietDV() {
+		return dsChiTietDV;
+	}
+
+	public void setDsChiTietDV(List<ChiTietDV> dsChiTietDV) {
+		this.dsChiTietDV = dsChiTietDV;
+	}
 
 	public int getMaHDDV() {
 		return maHDDV;
@@ -85,6 +110,7 @@ public class HoaDonDV implements Serializable {
 	public int getID() {
 		return this.maHDDV;
 	}
+	
 
 	@Override
 	public int hashCode() {

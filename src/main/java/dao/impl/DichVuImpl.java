@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.AbstractDao;
 import dao.DichVuDao;
+import model.DichVu;
 
 public class DichVuImpl extends AbstractDao implements DichVuDao{
 
@@ -14,8 +15,8 @@ public class DichVuImpl extends AbstractDao implements DichVuDao{
 
 	@Override
 	public List<model.DichVu> getListDichVu() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from DichVu";
+		return (List<DichVu>) getList(sql, DichVu.class);
 	}
 
 	@Override

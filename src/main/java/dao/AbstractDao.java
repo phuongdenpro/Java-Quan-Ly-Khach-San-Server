@@ -65,6 +65,7 @@ public class AbstractDao extends UnicastRemoteObject{
 
 			return true;
 		}catch (Exception e) {
+			e.printStackTrace();
 			tr.rollback();
 		}
 		return false;
@@ -103,13 +104,19 @@ public class AbstractDao extends UnicastRemoteObject{
 	}
 	
 	public List<?> getList(String sql, Class<?> classname){
+		em.clear();
 		return em.createNativeQuery(sql, classname)
 				.getResultList();
 	}
 	
 	public Object getSingle(String sql, Class<?> classname){
-		return em.createNativeQuery(sql, classname)
+		em.clear();
+		try {
+			return em.createNativeQuery(sql, classname)
 				.getSingleResult();
+		}catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public int getLastestId(String[] table, Class<?> classname) {

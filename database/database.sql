@@ -83,12 +83,19 @@ GO
 INSERT INTO dbo.HoaDonPhong (ngayGioNhan, ngayGioTra, tinhTrang, maKH)
 	values ('11-16-2021', '11-16-2021', 0, 1);
 
-INSERT INTO dbo.ChiTietHoaDonPhong (maHD, maPhong) values(1, 'P101');
-INSERT INTO dbo.ChiTietHoaDonPhong (maHD, maPhong) values(1, 'P102');
+INSERT INTO dbo.ChiTietHoaDonPhong (maHD, maPhong, donGia) values(1, 'P101', 20000);
+INSERT INTO dbo.ChiTietHoaDonPhong (maHD, maPhong, donGia) values(1, 'P102', 20000);
 
 INSERT INTO dbo.HoaDonDV (ngayGioLap, tinhTrang, maKH)
-	values ('11-16-2021', 0, 1);
+	values ('11-18-2021', 0, 2),
+			('11-17-2021', 0, 1),
+			('11-16-2021', 1, 1);
 
-INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong) values(1, 1, 3);
-INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong) values(1, 2, 5);
+INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong, donGia) values(1, 1, 3, 11000);
+INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong, donGia) values(1, 2, 5, 10000);
+INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong, donGia) values(2, 3, 10, 13000);
+INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong, donGia) values(2, 4, 5, 10000);
+INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong, donGia) values(3, 5, 4, 12000);
+INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong, donGia) values(3, 6, 5, 10000);
+INSERT INTO dbo.ChiTietDV (maHDDV, maDV, soLuong, donGia) values(3, 1, 5, 11000);
 	

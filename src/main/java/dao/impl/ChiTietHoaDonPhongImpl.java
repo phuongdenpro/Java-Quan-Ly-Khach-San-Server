@@ -52,13 +52,27 @@ public class ChiTietHoaDonPhongImpl extends AbstractDao implements ChiTietHoaDon
 
 	@Override
 	public boolean xoaChiTietHDP(int id) throws RemoteException {
-		// TODO Auto-generated method stub
+//		EntityTransaction tr = em.getTransaction();
+//		
+//		try {
+//			tr.begin();
+//			
+//			em.remove(cthdp);
+//			tr.commit();
+//
+//			return true;
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//			tr.rollback();
+//			
+//		}
+
 		return false;
 	}
 
 	@Override
 	public boolean xoaChiTietHDPByMaHD(int maHD) throws RemoteException {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

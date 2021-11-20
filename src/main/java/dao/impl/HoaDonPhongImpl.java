@@ -61,12 +61,10 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 			
 //			hdp
 			
-//			em.flush();
 			em.persist(hdp);
 			System.out.println(hdp.getMaHD());
 //			thêm cthd
 			List<ChiTietHoaDonPhong> dscthdp = hdp.getDsChiTietHoaDonPhong();
-//			hdp.setDsChiTietHoaDonPhong(null);
 			em.clear();
 			dscthdp.forEach(cthdp -> {
 				cthdp.setHoaDonPhong(hdp);
@@ -89,7 +87,7 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	@Override
 	public boolean xoaHoaDonPhong(int maHD) {
 		// TODO Auto-generated method stub
-		return false;
+		return xoa(maHD, HoaDonPhong.class);
 	}
 
 	@Override
@@ -134,15 +132,7 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 		return null;
 	}
 	
-	public static void main(String[] args) throws RemoteException {
-		KhachHang kh = new KhachHangImpl().getKhachHangByMaKH(1);
-		
-		List<ChiTietHoaDonPhong> dscthdp = new ArrayList<ChiTietHoaDonPhong>();
-		dscthdp.add(new ChiTietHoaDonPhong(new PhongImpl().getPhongByMaPhong("P101")));
-		HoaDonPhong hdp = new HoaDonPhong(Ngay.homNay(), Ngay.homNay(), kh, dscthdp);
-		HoaDonPhongDao hoaDonPhongDao = new HoaDonPhongImpl();
-		System.out.println(hoaDonPhongDao.themHoaDonPhong(hdp));
-	}
+
 
 	@Override
 	public HoaDonPhong getHDPbyMaHD(int maHD) throws RemoteException {
@@ -196,5 +186,15 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 
 	public String getError() {
 		return this.error;
+	}
+	
+	public static void main(String[] args) throws RemoteException {
+//		KhachHang kh = new KhachHangImpl().getKhachHangByMaKH(1);
+//		
+//		List<ChiTietHoaDonPhong> dscthdp = new ArrayList<ChiTietHoaDonPhong>();
+//		dscthdp.add(new ChiTietHoaDonPhong(new PhongImpl().getPhongByMaPhong("P101")));
+//		HoaDonPhong hdp = new HoaDonPhong(Ngay.homNay(), Ngay.homNay(), kh, dscthdp);
+//		HoaDonPhongDao hoaDonPhongDao = new HoaDonPhongImpl();
+//		System.out.println(hoaDonPhongDao.themHoaDonPhong(hdp));
 	}
 }
