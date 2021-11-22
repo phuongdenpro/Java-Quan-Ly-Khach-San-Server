@@ -10,6 +10,7 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 @IdClass(ChiTietDVPK.class)
 public class ChiTietDV implements Serializable{
@@ -29,6 +30,7 @@ public class ChiTietDV implements Serializable{
 	public ChiTietDV() {
 
 	}
+	
 
 	public ChiTietDV(DichVu dichVu, int soLuong, double donGia) {
 		this.dichVu = dichVu;

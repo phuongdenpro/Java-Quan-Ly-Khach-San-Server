@@ -39,7 +39,8 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	@Override
 	public List<model.HoaDonPhong> getListHoaDonPhongByMaKH(int maKH) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from HoaDonPhong where MaKH = "+maKH;
+		return (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
 	}
 
 	@Override
