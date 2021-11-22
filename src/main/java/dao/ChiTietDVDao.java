@@ -8,6 +8,7 @@ import java.util.List;
 import model.ChiTietDV;
 
 public interface ChiTietDVDao extends Remote{
+	public List<ChiTietDV> getListChiTietDV() throws RemoteException;
 	public List<ChiTietDV> getListChiTietDVByDate(Date tuNgay, Date denNgay) throws RemoteException;
 	public List<ChiTietDV> getListChiTietDVByMaKH(int maKH, Date tuNgay, Date denNgay) throws RemoteException;
 	public List<ChiTietDV> getListChiTietDVByMaHDDV(int maHDDV) throws RemoteException;
@@ -15,6 +16,8 @@ public interface ChiTietDVDao extends Remote{
 	public boolean xoaChiTietDV(int id) throws RemoteException;
 	public boolean xoaChiTietDVByMaHDDV(int maHDDV) throws RemoteException;
 	public boolean capNhatChiTietDV(ChiTietDV ctdv) throws RemoteException;
+	public List<ChiTietDV> getListChiTietDVByMaKH(int maKH)throws RemoteException;
+	public List<ChiTietDV> getListChiTietDVByMaKHAndDate(int maKH, Date tuNgay, Date denNgay) throws RemoteException;
 	
 	
 }

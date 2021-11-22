@@ -2,6 +2,9 @@ package dao.impl;
 
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityTransaction;
@@ -13,6 +16,7 @@ import model.ChiTietHoaDonPhong;
 import model.HoaDonDV;
 import model.HoaDonPhong;
 import model.KhachHang;
+
 
 public class HoaDonDVImpl extends AbstractDao implements HoaDonDVDao{
 
@@ -32,6 +36,7 @@ public class HoaDonDVImpl extends AbstractDao implements HoaDonDVDao{
 		return (HoaDonDV) getSingle(sql, HoaDonDV.class);
 	}
 
+	
 	@Override
 	public int themHoaDonDV(model.HoaDonDV hddv) {
 		EntityTransaction tr = em.getTransaction();
