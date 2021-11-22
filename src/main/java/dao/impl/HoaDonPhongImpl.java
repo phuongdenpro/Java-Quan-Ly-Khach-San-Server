@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 
 import dao.AbstractDao;
 import dao.HoaDonPhongDao;
+import model.ChiTietDV;
 import model.ChiTietHoaDonPhong;
 import model.HoaDonPhong;
 import model.KhachHang;
@@ -48,10 +49,34 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	}
 
 	@Override
-	public boolean themHoaDonPhong(model.HoaDonPhong hdp) {
+	public int themHoaDonPhong(model.HoaDonPhong hdp) {
 		EntityTransaction tr = em.getTransaction();
 		try {
 			tr.begin();
+			
+			error = "";
+			List<ChiTietHoaDonPhong> dscthdp = hdp.getDsChiTietHoaDonPhong();
+			
+			dscthdp.forEach(cthdp -> {
+				String sql = "select * \r\n"
+						+ "from HoaDonPhong as hdp\r\n"
+						+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+						+ "on hdp.maHD = cthdp.maHD\r\n"
+						+ "where tinhTrang != 2 and hdp.maHD != "+ hdp.getMaHD() +" and maPhong like '"+ cthdp.getPhong().getMaPhong() +"' and not (ngayGioNhan > '"+ hdp.getNgayGioTra() +"' or ngayGioTra < '"+ hdp.getNgayGioNhan() +"')";
+
+				int n = ((List<HoaDonPhong>) getList(sql, HoaDonPhong.class)).size();
+				if(n > 0) {
+					if(!error.equals("")) {
+						error += ", ";
+					}
+					error += cthdp.getPhong().getMaPhong();
+				}
+					
+			});
+			if(!error.equals("")) {
+				error = "Phòng: "+ error + " không trống trong thời điểm bạn chọn";
+				return -1;
+			}
 			
 			if(em.find(KhachHang.class, hdp.getKhachHang().getMaKH()) == null) {
 //				kh
@@ -64,7 +89,7 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 			em.persist(hdp);
 			System.out.println(hdp.getMaHD());
 //			thêm cthd
-			List<ChiTietHoaDonPhong> dscthdp = hdp.getDsChiTietHoaDonPhong();
+			
 			em.clear();
 			dscthdp.forEach(cthdp -> {
 				cthdp.setHoaDonPhong(hdp);
@@ -74,14 +99,14 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 			em.flush();
 			tr.commit();
 
-			return true;
+			return hdp.getMaHD();
 		}catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
 			
 		}
 		
-		return false;
+		return -1;
 	}
 
 	@Override
@@ -94,7 +119,7 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	public boolean capNhatHoaDonPhong(HoaDonPhong hdp) throws RemoteException {
 		
 		error = "";
-		List<ChiTietHoaDonPhong> dscthdp = new ChiTietHoaDonPhongImpl().getListChiTietHDPByMaHD(hdp.getMaHD());
+		List<ChiTietHoaDonPhong> dscthdp = hdp.getDsChiTietHoaDonPhong();
 		
 		dscthdp.forEach(cthdp -> {
 			String sql = "select * \r\n"
@@ -117,13 +142,37 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 			return false;
 		}
 		
-		return capNhat(hdp);
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			hdp.setDsChiTietHoaDonPhong(null);
+			em.merge(hdp);
+			
+			dscthdp.forEach(cthdp -> {
+				cthdp.setHoaDonPhong(hdp);
+				em.merge(cthdp);
+			});
+			em.flush();
+			tr.commit();
+
+			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return false;
+//		return capNhat(hdp);
 	}
 
 	@Override
 	public model.HoaDonPhong getHDPbyMaPhong(String maPhong) {
-		
-		return null;
+		String sql = "select * \r\n"
+				+ "from HoaDonPhong as hdp\r\n"
+				+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+				+ "on hdp.maHD = cthdp.maHD\r\n"
+				+ "where  maPhong like '"+ maPhong +"' and not (ngayGioNhan > '"+ Ngay.homNay() +"' or ngayGioTra < '"+ Ngay.homNay() +"')";
+		System.out.println();
+		return (HoaDonPhong) getSingle(sql, HoaDonPhong.class);
 	}
 
 	@Override

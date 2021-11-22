@@ -20,4 +20,5 @@ public interface PhongDao extends Remote {
 	public KhachHang getKHDaDatPhong(String maPhong) throws RemoteException; // đã đặt phòng tại thời điểm hiện tại
 	public boolean capNhatTinhTrangPhong(String MaPhong, int tinhTrang) throws RemoteException;
 	public boolean kiemTraPhongTrong(String maPhong, Date d1, Date d2) throws RemoteException; // kiểm tra xem phòng đó còn trống tại thời điểm đó không
+	public int getTinhTrangPhongHomNay(String maPhong) throws RemoteException;
 }
