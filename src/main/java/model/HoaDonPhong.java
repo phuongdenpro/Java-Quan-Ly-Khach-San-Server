@@ -28,7 +28,7 @@ public class HoaDonPhong implements Serializable {
 	@JoinColumn(name="MaKH")
     private KhachHang khachHang;
     
-    @OneToMany(mappedBy = "hoaDonPhong")
+    @OneToMany(mappedBy = "hoaDonPhong", cascade = CascadeType.REMOVE)
 	private List<ChiTietHoaDonPhong> dsChiTietHoaDonPhong;
     
     

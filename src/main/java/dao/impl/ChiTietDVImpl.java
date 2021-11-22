@@ -30,7 +30,6 @@ public class ChiTietDVImpl extends AbstractDao implements ChiTietDVDao{
 	@Override
 	public List<ChiTietDV> getListChiTietDVByMaHDDV(int maHDDV) {
 		String sql = "select * from ChiTietDV where maHDDV = " + maHDDV;
-		System.out.println(sql);
 		return (List<ChiTietDV>) getList(sql, ChiTietDV.class);
 	}
 
