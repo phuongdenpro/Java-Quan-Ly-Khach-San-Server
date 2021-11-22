@@ -47,6 +47,14 @@ public class HoaDonPhong implements Serializable {
         this.khachHang = khachHang;
     }
     
+    public HoaDonPhong(int maHD, Date ngayGioNhan, Date ngayGioTra, KhachHang khachHang, List<ChiTietHoaDonPhong> dscthdp) {
+    	this.maHD = maHD;
+        this.ngayGioNhan = ngayGioNhan;
+        this.ngayGioTra = ngayGioTra;
+        this.khachHang = khachHang;
+        this.dsChiTietHoaDonPhong = dscthdp;
+    }
+    
     public HoaDonPhong(Date ngayGioNhan, Date ngayGioTra, KhachHang khachHang, List<ChiTietHoaDonPhong> dscthdp) {
         this.ngayGioNhan = ngayGioNhan;
         this.ngayGioTra = ngayGioTra;
@@ -109,7 +117,7 @@ public class HoaDonPhong implements Serializable {
 	@Override
 	public String toString() {
 		return "HoaDonPhong [maHD=" + maHD + ", tinhTrang=" + tinhTrang + ", ngayGioNhan=" + ngayGioNhan
-				+ ", ngayGioTra=" + ngayGioTra + ", dsChiTietHoaDonPhong=" + dsChiTietHoaDonPhong + ", khachHang="
+				+ ", ngayGioTra=" + ngayGioTra + ", khachHang="
 				+ khachHang + "]";
 	}
 

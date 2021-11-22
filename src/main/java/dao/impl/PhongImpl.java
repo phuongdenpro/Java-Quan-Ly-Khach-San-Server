@@ -8,6 +8,7 @@ import dao.AbstractDao;
 import dao.PhongDao;
 import model.HoaDonPhong;
 import model.Phong;
+import utils.Ngay;
 
 public class PhongImpl extends AbstractDao implements PhongDao {
 
@@ -83,6 +84,21 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 			return true;
 		else 
 			return false;
+	}
+
+	@Override
+	public int getTinhTrangPhongHomNay(String maPhong) throws RemoteException {
+		String sql = "select * \r\n"
+				+ "from HoaDonPhong as hdp\r\n"
+				+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+				+ "on hdp.maHD = cthdp.maHD\r\n"
+				+ "where  maPhong like '"+ maPhong +"' and not (ngayGioNhan > '"+ Ngay.homNay() +"' or ngayGioTra < '"+ Ngay.homNay() +"')";
+		
+		HoaDonPhong hdp = (HoaDonPhong) getSingle(sql, HoaDonPhong.class);
+		if(hdp == null || hdp.getTinhTrang() == 2)
+			return 0;
+		
+		return hdp.getTinhTrang() + 1;
 	}
 
 }
