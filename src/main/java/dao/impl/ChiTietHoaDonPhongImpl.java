@@ -31,18 +31,20 @@ public class ChiTietHoaDonPhongImpl extends AbstractDao implements ChiTietHoaDon
 
 	@Override
 	public List<ChiTietHoaDonPhong> getListChiTietHDPByMaKH(int maKH) throws RemoteException {
-		String sql = "select * from ChiTietHoaDonPhong inner join HoaDonPhong on ChiTietHoaDonPhong.MaHD = HoaDonPhong.maHD inner join KhachHang on HoaDonPhong.MaKH = KhachHang.maKH where KhachHang.maKH ="+maKH;
+		String sql = "select * from ChiTietHoaDonPhong inner join HoaDonPhong on ChiTietHoaDonPhong.MaHD = HoaDonPhong.maHD inner join KhachHang on HoaDonPhong.MaKH = KhachHang.maKH where KhachHang.maKH ="
+				+ maKH;
 		return (List<ChiTietHoaDonPhong>) getList(sql, ChiTietHoaDonPhong.class);
-	//	return null;
+		// return null;
 	}
 
 	@Override
 	public List<ChiTietHoaDonPhong> getListChiTietHDPByMaKHAndDate(int maKH, Date tuNgay, Date denNgay)
 			throws RemoteException {
-//		String sql = "select * from ChiTietHoaDonPhong inner join HoaDonPhong on ChiTietHoaDonPhong.MaHD = HoaDonPhong.maHD inner join KhachHang on HoaDonPhong.MaKH = KhachHang.maKH"
-//				+" where ngayGioNhan >='2021-11-16' and ngayGioNhan <= '2021-11-16' and KhachHang.maKH = 1";
-//		return (List<ChiTietHoaDonPhong>) getList(sql, ChiTietHoaDonPhong.class);
-		return null;
+		String sql = "select * from ChiTietHoaDonPhong inner join HoaDonPhong on ChiTietHoaDonPhong.MaHD = HoaDonPhong.maHD inner join KhachHang on HoaDonPhong.MaKH = KhachHang.maKH"
+				+ " where ngayGioNhan >= '" + tuNgay + "' and ngayGioNhan <= '" + denNgay + "' and KhachHang.maKH = "
+				+ maKH;
+		return (List<ChiTietHoaDonPhong>) getList(sql, ChiTietHoaDonPhong.class);
+
 	}
 
 	@Override
