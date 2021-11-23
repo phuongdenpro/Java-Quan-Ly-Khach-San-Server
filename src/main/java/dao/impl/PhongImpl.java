@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
+
 import dao.AbstractDao;
 import dao.PhongDao;
 import model.HoaDonPhong;
@@ -12,8 +14,8 @@ import utils.Ngay;
 
 public class PhongImpl extends AbstractDao implements PhongDao {
 
-	public PhongImpl() throws RemoteException {
-		super();
+	public PhongImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 
 	@Override
@@ -79,7 +81,7 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 	@Override
 	public boolean kiemTraPhongTrong(String maPhong, Date d1, Date d2) throws RemoteException {
 		String sql = "select * from Phong";
-		List<HoaDonPhong> dshdp = new HoaDonPhongImpl().getListHDPDaDatHoacDangOByMaPhong(maPhong, d1, d2);
+		List<HoaDonPhong> dshdp = new HoaDonPhongImpl(factory).getListHDPDaDatHoacDangOByMaPhong(maPhong, d1, d2);
 		if(dshdp.size() == 0)
 			return true;
 		else 

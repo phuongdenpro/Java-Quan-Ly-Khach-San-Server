@@ -20,7 +20,7 @@ import model.LoaiPhong;
 public class AbstractDao extends UnicastRemoteObject{
 	
 
-	private EntityManagerFactory factory;
+	protected EntityManagerFactory factory;
 	protected EntityManager em;
 	public String[] DICHVU = {"DichVu", "maDV"};
 	public String[] HOADONDV= {"HoaDonDV", "maHDDV"};
@@ -29,11 +29,9 @@ public class AbstractDao extends UnicastRemoteObject{
 	public String[] LOAIPHONG = {"LoaiPhong", "maLoaiPhong"};
 	public String[] PHONG = {"Phong", "maPhong"};
 
-	protected AbstractDao() throws RemoteException {
+	protected AbstractDao(EntityManagerFactory factory) throws RemoteException {
 		super();
-		
-		factory = Persistence.createEntityManagerFactory("QuanLyKhachSan_Server");
-	
+		this.factory = factory;
 		em = factory.createEntityManager();
 		
 	}
@@ -123,10 +121,5 @@ public class AbstractDao extends UnicastRemoteObject{
 		String sql = "SELECT top 1 "+ table[1] +" FROM dbo."+ table[0] +" order by " + table[1] + " desc";
 		Object obj = em.createNativeQuery(sql).getSingleResult();
 		return (Integer) obj;
-	}
-	
-	public static void main(String[] args) throws RemoteException {
-		AbstractDao abstractDao = new AbstractDao();
-		System.out.println(abstractDao.getLastestId(abstractDao.HOADONPHONG, model.HoaDonPhong.class));
 	}
 }

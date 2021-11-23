@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
 
 import dao.AbstractDao;
 import dao.ChiTietDVDao;
@@ -18,8 +19,8 @@ import utils.Ngay;
 
 public class ChiTietDVImpl extends AbstractDao implements ChiTietDVDao{
 
-	public ChiTietDVImpl() throws RemoteException {
-		super();
+	public ChiTietDVImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 	@Override
 	public List<ChiTietDV> getListChiTietDV() throws RemoteException {

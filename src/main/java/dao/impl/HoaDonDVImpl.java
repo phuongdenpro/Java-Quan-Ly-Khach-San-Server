@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 import dao.AbstractDao;
@@ -20,8 +21,8 @@ import model.KhachHang;
 
 public class HoaDonDVImpl extends AbstractDao implements HoaDonDVDao{
 
-	public HoaDonDVImpl() throws RemoteException {
-		super();
+	public HoaDonDVImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 
 	@Override

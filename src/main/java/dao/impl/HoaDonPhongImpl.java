@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 import dao.AbstractDao;
@@ -20,8 +21,8 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 	private String error;
 
 
-	public HoaDonPhongImpl() throws RemoteException {
-		super();
+	public HoaDonPhongImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 
 	@Override

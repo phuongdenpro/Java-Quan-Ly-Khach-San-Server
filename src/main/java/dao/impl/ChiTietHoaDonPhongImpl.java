@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 import dao.AbstractDao;
@@ -12,8 +13,8 @@ import model.ChiTietHoaDonPhong;
 
 public class ChiTietHoaDonPhongImpl extends AbstractDao implements ChiTietHoaDonPhongDao {
 
-	public ChiTietHoaDonPhongImpl() throws RemoteException {
-		super();
+	public ChiTietHoaDonPhongImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 
 	@Override
