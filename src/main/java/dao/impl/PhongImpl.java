@@ -96,11 +96,25 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 				+ "on hdp.maHD = cthdp.maHD\r\n"
 				+ "where  maPhong like '"+ maPhong +"' and not (ngayGioNhan > '"+ Ngay.homNay() +"' or ngayGioTra < '"+ Ngay.homNay() +"')";
 		
-		HoaDonPhong hdp = (HoaDonPhong) getSingle(sql, HoaDonPhong.class);
-		if(hdp == null || hdp.getTinhTrang() == 2)
+		List<HoaDonPhong> dshdp = (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
+		if(dshdp.size() == 0)
 			return 0;
 		
-		return hdp.getTinhTrang() + 1;
+		boolean dangO = false;
+		boolean duocDat = false;
+		for(HoaDonPhong hdp: dshdp) {
+			if(hdp.getTinhTrang() == 1) // dang o
+				dangO = true;
+			else if(hdp.getTinhTrang() == 0) // da duoc dat
+				duocDat = true;
+		}
+		
+		if(dangO)
+			return 2;
+		if(duocDat)
+			return 1;
+		
+		return 0;
 	}
 
 }

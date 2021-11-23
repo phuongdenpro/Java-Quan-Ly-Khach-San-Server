@@ -12,6 +12,7 @@ import dao.AbstractDao;
 import dao.HoaDonPhongDao;
 import model.ChiTietDV;
 import model.ChiTietHoaDonPhong;
+import model.ChiTietHoaDonPhongPK;
 import model.HoaDonPhong;
 import model.KhachHang;
 import utils.Ngay;
@@ -154,6 +155,22 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 				cthdp.setHoaDonPhong(hdp);
 				em.merge(cthdp);
 			});
+//			em.clear();
+//			xóa các phòng không đặt nữa
+			List<ChiTietHoaDonPhong> dscthdp2 = new ChiTietHoaDonPhongImpl(factory).getListChiTietHDPByMaHD(hdp.getMaHD());
+			dscthdp2.forEach(cthdp -> {
+				boolean flag = false;
+				for(int i=0; i<dscthdp.size(); i++) {
+					if(dscthdp.get(i).getPhong().getMaPhong().equals(cthdp.getPhong().getMaPhong())) {
+						flag = true;
+						break;
+					}
+				}
+				if(flag == false) {
+					em.remove(em.find(ChiTietHoaDonPhong.class, new ChiTietHoaDonPhongPK(cthdp.getPhong(), hdp)));
+				}
+			});
+			
 			em.flush();
 			tr.commit();
 
@@ -173,6 +190,17 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 				+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
 				+ "on hdp.maHD = cthdp.maHD\r\n"
 				+ "where  maPhong like '"+ maPhong +"' and not (ngayGioNhan > '"+ Ngay.homNay() +"' or ngayGioTra < '"+ Ngay.homNay() +"')";
+		System.out.println();
+		return (HoaDonPhong) getSingle(sql, HoaDonPhong.class);
+	}
+	
+	@Override
+	public model.HoaDonPhong getHDPThanhToanByMaPhong(String maPhong) {
+		String sql = "select * \r\n"
+				+ "from HoaDonPhong as hdp\r\n"
+				+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+				+ "on hdp.maHD = cthdp.maHD\r\n"
+				+ "where tinhtrang = 1 and maPhong like '"+ maPhong +"' and not (ngayGioNhan > '"+ Ngay.homNay() +"' or ngayGioTra < '"+ Ngay.homNay() +"')";
 		System.out.println();
 		return (HoaDonPhong) getSingle(sql, HoaDonPhong.class);
 	}

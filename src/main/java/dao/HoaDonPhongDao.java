@@ -17,6 +17,7 @@ public interface HoaDonPhongDao extends Remote {
 	public boolean xoaHoaDonPhong(int maHD) throws RemoteException;
 	public boolean capNhatHoaDonPhong(HoaDonPhong hdp) throws RemoteException;
 	public HoaDonPhong getHDPbyMaPhong(String maPhong) throws RemoteException; // lấy hóa đơn của phòng trong thời điểm hiện tại
+	public HoaDonPhong getHDPThanhToanByMaPhong(String maPhong) throws RemoteException;
 	public List<HoaDonPhong> getListHDPByTinhTrang() throws RemoteException;
 	public List<HoaDonPhong> getListHDPByMaPhong(String maPhong) throws RemoteException;
 	public List<HoaDonPhong> getListHDPByMaPhong(String maPhong, Date d1, Date d2) throws RemoteException; 
