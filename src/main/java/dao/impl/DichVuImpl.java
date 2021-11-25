@@ -30,19 +30,19 @@ public class DichVuImpl extends AbstractDao implements DichVuDao{
 	@Override
 	public boolean themDichVu(model.DichVu dv) {
 		// TODO Auto-generated method stub
-		return false;
+		return them(dv);
 	}
 
 	@Override
 	public boolean capNhatDichVu(model.DichVu dv) {
 		// TODO Auto-generated method stub
-		return false;
+		return capNhat(dv);
 	}
 
 	@Override
 	public boolean xoaDichVu(int maDV) {
 		// TODO Auto-generated method stub
-		return false;
+		return xoa(maDV, DichVu.class);
 	}
 
 }

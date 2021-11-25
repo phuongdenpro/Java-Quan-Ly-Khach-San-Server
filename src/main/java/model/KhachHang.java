@@ -23,7 +23,6 @@ public class KhachHang implements Serializable {
 	private Date ngayHetHan;
 	@Column(columnDefinition = "NVARCHAR(50)")
 	private String loaiKH;
-	private int soLanDatPhong = 0;
 	
 	@OneToMany(mappedBy = "khachHang")
 	private List<HoaDonPhong> dsHoaDon;
@@ -35,14 +34,13 @@ public class KhachHang implements Serializable {
 	
 	}
 
-	public KhachHang(int maKH, String tenKH, String cmnd, String soDienThoai, Date ngayHetHan, String loaiKH, int soLanDatPhong) {
+	public KhachHang(int maKH, String tenKH, String cmnd, String soDienThoai, Date ngayHetHan, String loaiKH) {
 		setMaKH(maKH);
 		setTenKH(tenKH);
 		setCmnd(cmnd);
 		this.soDienThoai = soDienThoai;
 		this.ngayHetHan = ngayHetHan;
 		this.loaiKH = loaiKH;
-		setSoLanDatPhong(soLanDatPhong);
 	}
 	
 	public KhachHang(String tenKH, String cmnd, String soDienThoai, Date ngayHetHan, String loaiKH) {
@@ -51,7 +49,6 @@ public class KhachHang implements Serializable {
 		this.soDienThoai = soDienThoai;
 		this.ngayHetHan = ngayHetHan;
 		this.loaiKH = loaiKH;
-		setSoLanDatPhong(0);
 	}
 
 
@@ -72,16 +69,6 @@ public class KhachHang implements Serializable {
 		if (tenKH.equals(""))
 			tenKH = "Chưa cập nhật";
 		this.tenKH = tenKH;
-	}
-
-	public int getSoLanDatPhong() {
-		return soLanDatPhong;
-	}
-
-	public void setSoLanDatPhong(int soLanDatPhong) {
-		if (soLanDatPhong <= 0)
-			soLanDatPhong = 0;
-		this.soLanDatPhong = soLanDatPhong;
 	}
 
 	public String getCmnd() {
@@ -129,8 +116,7 @@ public class KhachHang implements Serializable {
 	@Override
 	public String toString() {
 		return "KhachHang [maKH=" + maKH + ", tenKH=" + tenKH + ", cmnd=" + cmnd + ", soDienThoai=" + soDienThoai
-				+ ", ngayHetHan=" + ngayHetHan + ", loaiKH=" + loaiKH + ", soLanDatPhong=" + soLanDatPhong
-				+ "]";
+				+ ", ngayHetHan=" + ngayHetHan + ", loaiKH=" + loaiKH + "]";
 	}
 
 	@Override
