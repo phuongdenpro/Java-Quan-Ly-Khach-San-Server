@@ -204,6 +204,17 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 		System.out.println();
 		return (HoaDonPhong) getSingle(sql, HoaDonPhong.class);
 	}
+	
+	@Override
+	public List<HoaDonPhong> getListHDPChuaThanhToanByMaPhong(String maPhong) {
+		String sql = "select * \r\n"
+				+ "from HoaDonPhong as hdp\r\n"
+				+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+				+ "on hdp.maHD = cthdp.maHD\r\n"
+				+ "where tinhtrang != 2 and maPhong like '"+ maPhong +"'";
+		System.out.println();
+		return (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
+	}
 
 	@Override
 	public List<model.HoaDonPhong> getListHDPByTinhTrang() {

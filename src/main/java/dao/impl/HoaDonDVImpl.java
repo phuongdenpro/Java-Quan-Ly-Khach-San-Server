@@ -13,7 +13,9 @@ import javax.persistence.EntityTransaction;
 import dao.AbstractDao;
 import dao.HoaDonDVDao;
 import model.ChiTietDV;
+import model.ChiTietDVPK;
 import model.ChiTietHoaDonPhong;
+import model.ChiTietHoaDonPhongPK;
 import model.HoaDonDV;
 import model.HoaDonPhong;
 import model.KhachHang;
@@ -84,6 +86,21 @@ public class HoaDonDVImpl extends AbstractDao implements HoaDonDVDao{
 			dscthddv.forEach(cthddv -> {
 				cthddv.setHoaDonDV(hddv);
 				em.merge(cthddv);
+			});
+			
+//			xóa các dịch vụ không sử dụng nữa
+			List<ChiTietDV> dscthddv2 = new ChiTietDVImpl(factory).getListChiTietDVByMaHDDV(hddv.getMaHDDV());
+			dscthddv2.forEach(cthddv -> {
+				boolean flag = false;
+				for(int i=0; i<dscthddv.size(); i++) {
+					if(dscthddv.get(i).getDichVu().getMaDV() == cthddv.getDichVu().getMaDV()) {
+						flag = true;
+						break;
+					}
+				}
+				if(flag == false) {
+					em.remove(em.find(ChiTietDV.class, new ChiTietDVPK(cthddv.getDichVu(), hddv)));
+				}
 			});
 			em.flush();
 			tr.commit();
