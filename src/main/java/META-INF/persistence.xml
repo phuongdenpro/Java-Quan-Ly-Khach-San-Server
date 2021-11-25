@@ -26,7 +26,7 @@
                       value="sa" />
 
             <property name="javax.persistence.jdbc.password"
-                      value="123" />
+                      value="sapassword" />
 
             <property name="hibernate.show_sql"
                       value="true" />

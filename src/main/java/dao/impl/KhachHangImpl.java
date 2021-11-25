@@ -41,13 +41,13 @@ public class KhachHangImpl extends AbstractDao implements KhachHangDao {
 	@Override
 	public boolean capNhatKhachHang(model.KhachHang kh) {
 		// TODO Auto-generated method stub
-		return false;
+		return capNhat(kh);
 	}
 
 	@Override
 	public boolean xoaKhachHang(int maKH) {
 		// TODO Auto-generated method stub
-		return false;
+		return xoa(maKH, KhachHang.class);
 	}
 
 }
