@@ -14,6 +14,16 @@ public class ChiTietDVPK implements Serializable {
 	public ChiTietDVPK() {
 	
 	}
+	
+	
+
+	public ChiTietDVPK(DichVu dichVu, HoaDonDV hoaDonDV) {
+		super();
+		this.dichVu = dichVu;
+		this.hoaDonDV = hoaDonDV;
+	}
+
+
 
 	@Override
 	public int hashCode() {

@@ -3,14 +3,16 @@ package dao.impl;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
+
 import dao.AbstractDao;
 import dao.KhachHangDao;
 import model.KhachHang;
 
 public class KhachHangImpl extends AbstractDao implements KhachHangDao {
 
-	public KhachHangImpl() throws RemoteException {
-		super();
+	public KhachHangImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 import dao.AbstractDao;
@@ -12,8 +13,8 @@ import model.ChiTietHoaDonPhong;
 
 public class ChiTietHoaDonPhongImpl extends AbstractDao implements ChiTietHoaDonPhongDao {
 
-	public ChiTietHoaDonPhongImpl() throws RemoteException {
-		super();
+	public ChiTietHoaDonPhongImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 
 	@Override
@@ -29,22 +30,40 @@ public class ChiTietHoaDonPhongImpl extends AbstractDao implements ChiTietHoaDon
 	}
 
 	@Override
+	public List<ChiTietHoaDonPhong> getListChiTietHDPByMaKH(int maKH) throws RemoteException {
+		String sql = "select * from ChiTietHoaDonPhong inner join HoaDonPhong on ChiTietHoaDonPhong.MaHD = HoaDonPhong.maHD inner join KhachHang on HoaDonPhong.MaKH = KhachHang.maKH where KhachHang.maKH ="
+				+ maKH;
+		return (List<ChiTietHoaDonPhong>) getList(sql, ChiTietHoaDonPhong.class);
+		// return null;
+	}
+
+	@Override
+	public List<ChiTietHoaDonPhong> getListChiTietHDPByMaKHAndDate(int maKH, Date tuNgay, Date denNgay)
+			throws RemoteException {
+		String sql = "select * from ChiTietHoaDonPhong inner join HoaDonPhong on ChiTietHoaDonPhong.MaHD = HoaDonPhong.maHD inner join KhachHang on HoaDonPhong.MaKH = KhachHang.maKH"
+				+ " where ngayGioNhan >= '" + tuNgay + "' and ngayGioNhan <= '" + denNgay + "' and KhachHang.maKH = "
+				+ maKH;
+		return (List<ChiTietHoaDonPhong>) getList(sql, ChiTietHoaDonPhong.class);
+
+	}
+
+	@Override
 	public boolean themChiTietHDP(model.ChiTietHoaDonPhong cthdp) throws RemoteException {
 		EntityTransaction tr = em.getTransaction();
-		
+
 		try {
 			tr.begin();
 			em.merge(cthdp.getHoaDonPhong());
-			
+
 			em.merge(cthdp.getPhong());
 			em.persist(cthdp);
 			tr.commit();
 
 			return true;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
-			
+
 		}
 
 		return false;
@@ -52,13 +71,27 @@ public class ChiTietHoaDonPhongImpl extends AbstractDao implements ChiTietHoaDon
 
 	@Override
 	public boolean xoaChiTietHDP(int id) throws RemoteException {
-		// TODO Auto-generated method stub
+//		EntityTransaction tr = em.getTransaction();
+//		
+//		try {
+//			tr.begin();
+//			
+//			em.remove(cthdp);
+//			tr.commit();
+//
+//			return true;
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//			tr.rollback();
+//			
+//		}
+
 		return false;
 	}
 
 	@Override
 	public boolean xoaChiTietHDPByMaHD(int maHD) throws RemoteException {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 

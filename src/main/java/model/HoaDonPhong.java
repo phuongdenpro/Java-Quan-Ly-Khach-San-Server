@@ -28,7 +28,7 @@ public class HoaDonPhong implements Serializable {
 	@JoinColumn(name="MaKH")
     private KhachHang khachHang;
     
-    @OneToMany(mappedBy = "hoaDonPhong")
+    @OneToMany(mappedBy = "hoaDonPhong", cascade = CascadeType.REMOVE)
 	private List<ChiTietHoaDonPhong> dsChiTietHoaDonPhong;
     
     
@@ -45,6 +45,14 @@ public class HoaDonPhong implements Serializable {
         this.ngayGioNhan = ngayGioNhan;
         this.ngayGioTra = ngayGioTra;
         this.khachHang = khachHang;
+    }
+    
+    public HoaDonPhong(int maHD, Date ngayGioNhan, Date ngayGioTra, KhachHang khachHang, List<ChiTietHoaDonPhong> dscthdp) {
+    	this.maHD = maHD;
+        this.ngayGioNhan = ngayGioNhan;
+        this.ngayGioTra = ngayGioTra;
+        this.khachHang = khachHang;
+        this.dsChiTietHoaDonPhong = dscthdp;
     }
     
     public HoaDonPhong(Date ngayGioNhan, Date ngayGioTra, KhachHang khachHang, List<ChiTietHoaDonPhong> dscthdp) {
@@ -109,7 +117,7 @@ public class HoaDonPhong implements Serializable {
 	@Override
 	public String toString() {
 		return "HoaDonPhong [maHD=" + maHD + ", tinhTrang=" + tinhTrang + ", ngayGioNhan=" + ngayGioNhan
-				+ ", ngayGioTra=" + ngayGioTra + ", dsChiTietHoaDonPhong=" + dsChiTietHoaDonPhong + ", khachHang="
+				+ ", ngayGioTra=" + ngayGioTra + ", khachHang="
 				+ khachHang + "]";
 	}
 

@@ -13,6 +13,16 @@ public class ChiTietHoaDonPhongPK implements Serializable{
 	public ChiTietHoaDonPhongPK() {
 	
 	}
+	
+	
+
+	public ChiTietHoaDonPhongPK(Phong phong, HoaDonPhong hoaDonPhong) {
+		super();
+		this.phong = phong;
+		this.hoaDonPhong = hoaDonPhong;
+	}
+
+
 
 	@Override
 	public int hashCode() {

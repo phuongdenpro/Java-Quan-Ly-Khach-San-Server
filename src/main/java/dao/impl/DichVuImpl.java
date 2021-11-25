@@ -3,19 +3,22 @@ package dao.impl;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
+
 import dao.AbstractDao;
 import dao.DichVuDao;
+import model.DichVu;
 
 public class DichVuImpl extends AbstractDao implements DichVuDao{
 
-	public DichVuImpl() throws RemoteException {
-		super();
+	public DichVuImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 
 	@Override
 	public List<model.DichVu> getListDichVu() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from DichVu";
+		return (List<DichVu>) getList(sql, DichVu.class);
 	}
 
 	@Override

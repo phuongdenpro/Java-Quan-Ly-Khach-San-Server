@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -44,6 +46,8 @@ public class Server extends JFrame{
 		setLocationRelativeTo(null);
 		setTitle("Server quản lý khách sạn");
 		
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("QuanLyKhachSan_Server");
+		
 		this.getContentPane().add(new JScrollPane(taConsole = new JTextArea()));
 		
 //		RMI
@@ -57,28 +61,28 @@ public class Server extends JFrame{
 		LocateRegistry.createRegistry(port);
 		Context context = new InitialContext();
 		
-		ChiTietDVDao chiTietDVDao = new ChiTietDVImpl();
+		ChiTietDVDao chiTietDVDao = new ChiTietDVImpl(factory);
 		context.bind("rmi://"+ ip +":"+ port +"/ChiTietDV", chiTietDVDao);
 		
-		ChiTietHoaDonPhongDao chiTietHDPDao = new ChiTietHoaDonPhongImpl();
+		ChiTietHoaDonPhongDao chiTietHDPDao = new ChiTietHoaDonPhongImpl(factory);
 		context.bind("rmi://"+ ip +":"+ port +"/ChiTietHoaDonPhong", chiTietHDPDao);
 		
-		DichVuDao dichVuDao = new DichVuImpl();
+		DichVuDao dichVuDao = new DichVuImpl(factory);
 		context.bind("rmi://"+ ip +":"+ port +"/DichVu", dichVuDao);
 		
-		HoaDonDVDao hoaDonDVDao = new HoaDonDVImpl();
+		HoaDonDVDao hoaDonDVDao = new HoaDonDVImpl(factory);
 		context.bind("rmi://"+ ip +":"+ port +"/HoaDonDV", hoaDonDVDao);
 		
-		HoaDonPhongDao hoaDonPhongDao = new HoaDonPhongImpl();
+		HoaDonPhongDao hoaDonPhongDao = new HoaDonPhongImpl(factory);
 		context.bind("rmi://"+ ip +":"+ port +"/HoaDonPhong", hoaDonPhongDao);
 		
-		KhachHangDao khachHangDao = new KhachHangImpl();
+		KhachHangDao khachHangDao = new KhachHangImpl(factory);
 		context.bind("rmi://"+ ip +":"+ port +"/KhachHang", khachHangDao);
 		
-		LoaiPhongDao loaiPhongDao= new LoaiPhongImpl();
+		LoaiPhongDao loaiPhongDao= new LoaiPhongImpl(factory);
 		context.bind("rmi://"+ ip +":"+ port +"/LoaiPhong", loaiPhongDao);
 		
-		PhongDao phongDao= new PhongImpl();
+		PhongDao phongDao= new PhongImpl(factory);
 		context.bind("rmi://"+ ip +":"+ port +"/Phong", phongDao);
 		
 		System.out.println("Server bound to the RMIRegistry");

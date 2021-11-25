@@ -4,15 +4,18 @@ import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
+
 import dao.AbstractDao;
 import dao.PhongDao;
 import model.HoaDonPhong;
 import model.Phong;
+import utils.Ngay;
 
 public class PhongImpl extends AbstractDao implements PhongDao {
 
-	public PhongImpl() throws RemoteException {
-		super();
+	public PhongImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 
 	@Override
@@ -78,11 +81,40 @@ public class PhongImpl extends AbstractDao implements PhongDao {
 	@Override
 	public boolean kiemTraPhongTrong(String maPhong, Date d1, Date d2) throws RemoteException {
 		String sql = "select * from Phong";
-		List<HoaDonPhong> dshdp = new HoaDonPhongImpl().getListHDPDaDatHoacDangOByMaPhong(maPhong, d1, d2);
+		List<HoaDonPhong> dshdp = new HoaDonPhongImpl(factory).getListHDPDaDatHoacDangOByMaPhong(maPhong, d1, d2);
 		if(dshdp.size() == 0)
 			return true;
 		else 
 			return false;
+	}
+
+	@Override
+	public int getTinhTrangPhongHomNay(String maPhong) throws RemoteException {
+		String sql = "select * \r\n"
+				+ "from HoaDonPhong as hdp\r\n"
+				+ "inner join ChiTietHoaDonPhong as cthdp\r\n"
+				+ "on hdp.maHD = cthdp.maHD\r\n"
+				+ "where  maPhong like '"+ maPhong +"' and not (ngayGioNhan > '"+ Ngay.homNay() +"' or ngayGioTra < '"+ Ngay.homNay() +"')";
+		
+		List<HoaDonPhong> dshdp = (List<HoaDonPhong>) getList(sql, HoaDonPhong.class);
+		if(dshdp.size() == 0)
+			return 0;
+		
+		boolean dangO = false;
+		boolean duocDat = false;
+		for(HoaDonPhong hdp: dshdp) {
+			if(hdp.getTinhTrang() == 1) // dang o
+				dangO = true;
+			else if(hdp.getTinhTrang() == 0) // da duoc dat
+				duocDat = true;
+		}
+		
+		if(dangO)
+			return 2;
+		if(duocDat)
+			return 1;
+		
+		return 0;
 	}
 
 }

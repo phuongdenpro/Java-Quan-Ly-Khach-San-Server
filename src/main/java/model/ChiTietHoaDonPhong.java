@@ -23,12 +23,23 @@ public class ChiTietHoaDonPhong implements Serializable{
 	@JoinColumn(name="MaPhong")
 	private Phong phong;
 	
-	public ChiTietHoaDonPhong() {
+	private double donGia;
 	
+	public ChiTietHoaDonPhong() {
+		
 	}
 	
-	public ChiTietHoaDonPhong(Phong phong) {
+	public ChiTietHoaDonPhong(Phong phong, double donGia) {
 		this.phong = phong;
+		this.donGia = donGia;
+	}
+
+	public double getDonGia() {
+		return donGia;
+	}
+
+	public void setDonGia(double donGia) {
+		this.donGia = donGia;
 	}
 
 	public Phong getPhong() {

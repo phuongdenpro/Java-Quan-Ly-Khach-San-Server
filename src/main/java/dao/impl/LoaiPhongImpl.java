@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
+
 import dao.AbstractDao;
 import dao.LoaiPhongDao;
 import model.LoaiPhong;
@@ -11,8 +13,8 @@ import model.Phong;
 
 public class LoaiPhongImpl extends AbstractDao implements LoaiPhongDao {
 
-	public LoaiPhongImpl() throws RemoteException {
-//		super();
+	public LoaiPhongImpl(EntityManagerFactory factory) throws RemoteException {
+		super(factory);
 	}
 
 	@Override
