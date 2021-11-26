@@ -26,6 +26,12 @@ public class DichVuImpl extends AbstractDao implements DichVuDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public List<DichVu> timKiemDichVu(String key, String val) throws RemoteException {
+		// TODO Auto-generated method stub
+		String sql = "Select * from DichVu where "+key+" like N'%"+val+"%'";
+		return (List<DichVu>) getList(sql, DichVu.class);
+	}
 
 	@Override
 	public boolean themDichVu(model.DichVu dv) {
@@ -44,5 +50,7 @@ public class DichVuImpl extends AbstractDao implements DichVuDao{
 		// TODO Auto-generated method stub
 		return xoa(maDV, DichVu.class);
 	}
+
+	
 
 }

@@ -12,5 +12,6 @@ public interface DichVuDao extends Remote {
 	public boolean themDichVu(DichVu dv) throws RemoteException;
 	public boolean capNhatDichVu(DichVu dv) throws RemoteException;
 	public boolean xoaDichVu(int maDV) throws RemoteException;
+	public List<DichVu> timKiemDichVu(String key, String val) throws RemoteException;
 	
 }
