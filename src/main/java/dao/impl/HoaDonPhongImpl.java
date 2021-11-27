@@ -180,7 +180,6 @@ public class HoaDonPhongImpl  extends AbstractDao implements HoaDonPhongDao{
 			tr.rollback();
 		}
 		return false;
-//		return capNhat(hdp);
 	}
 
 	@Override
