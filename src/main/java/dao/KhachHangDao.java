@@ -13,4 +13,5 @@ public interface KhachHangDao extends Remote {
 	public boolean themKhachHang(KhachHang kh) throws RemoteException;
 	public boolean capNhatKhachHang(KhachHang kh) throws RemoteException;
 	public boolean xoaKhachHang(int maKH) throws RemoteException;
+	public List<KhachHang> TimKiemKhachHang(String key, String val) throws RemoteException;
 }

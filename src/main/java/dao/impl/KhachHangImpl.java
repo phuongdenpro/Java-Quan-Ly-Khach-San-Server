@@ -32,6 +32,13 @@ public class KhachHangImpl extends AbstractDao implements KhachHangDao {
 		String sql = "Select * from KhachHang where maKH = "+maKH;
 		return (KhachHang) getSingle(sql, KhachHang.class);
 	}
+	
+	@Override
+	public List<KhachHang> TimKiemKhachHang(String key, String val) throws RemoteException {
+		// TODO Auto-generated method stub
+		String sql = "Select * from KhachHang where "+key+" like N'%"+val+"%'";
+		return (List<KhachHang>) getList(sql, KhachHang.class);
+	}
 
 	@Override
 	public boolean themKhachHang(model.KhachHang kh) {
@@ -49,5 +56,7 @@ public class KhachHangImpl extends AbstractDao implements KhachHangDao {
 		// TODO Auto-generated method stub
 		return xoa(maKH, KhachHang.class);
 	}
+
+	
 
 }
