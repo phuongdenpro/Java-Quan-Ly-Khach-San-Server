@@ -36,6 +36,13 @@ public class ChiTietHoaDonPhongImpl extends AbstractDao implements ChiTietHoaDon
 		return (List<ChiTietHoaDonPhong>) getList(sql, ChiTietHoaDonPhong.class);
 		// return null;
 	}
+	@Override
+	public List<ChiTietHoaDonPhong> getListChiTietHDPByMaPhong(String maPhong) throws RemoteException {
+		String sql = "select * from ChiTietHoaDonPhong inner join HoaDonPhong on ChiTietHoaDonPhong.MaHD = HoaDonPhong.maHD inner join KhachHang on HoaDonPhong.MaKH = KhachHang.maKH where MaPhong like N'"
+				+ maPhong+"'";
+		return (List<ChiTietHoaDonPhong>) getList(sql, ChiTietHoaDonPhong.class);
+		// return null;
+	}
 
 	@Override
 	public List<ChiTietHoaDonPhong> getListChiTietHDPByMaKHAndDate(int maKH, Date tuNgay, Date denNgay)

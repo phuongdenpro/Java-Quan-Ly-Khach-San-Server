@@ -17,6 +17,7 @@ public interface ChiTietHoaDonPhongDao extends Remote{
 	public boolean capNhatChiTietHDP(ChiTietHoaDonPhongDao cthdp) throws RemoteException;
 	public List<ChiTietHoaDonPhong> getListChiTietHDPByMaKH(int maKH) throws RemoteException;
 	public List<ChiTietHoaDonPhong> getListChiTietHDPByMaKHAndDate(int maKH, Date tuNgay, Date denNgay) throws RemoteException;
+	public List<ChiTietHoaDonPhong> getListChiTietHDPByMaPhong(String maPhong) throws RemoteException;
 	
 	
 }
