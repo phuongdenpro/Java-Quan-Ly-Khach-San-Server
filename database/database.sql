@@ -2,13 +2,13 @@ USE QLKS
 GO
 
 INSERT INTO dbo.KhachHang
-	(tenKH, cmnd, soDienThoai, ngayHetHan, loaiKH, soLanDatPhong)
+	(tenKH, cmnd, soDienThoai, ngayHetHan, loaiKH)
 VALUES
-	(N'Chí Phèo', N'123123123', '0987654321', '20230101', N'Việt Nam', 0),
-	(N'Xuân Tóc Đỏ', N'123123123', '0987654322', '20220501', N'Việt Nam', 0),
-	(N'Lão Hạc', N'123123123', '0987654333', '20230106', N'Việt Nam', 1),
-	(N'John Wick', N'123123123', '0987655555', '20240513', N'Nước ngoài', 0),
-	(N'Tony Stark', N'123123123', '0987654399', '20240206', N'Nước ngoài', 1)
+	(N'Chí Phèo', N'123123123', '0987654321', '20230101', N'Việt Nam'),
+	(N'Xuân Tóc Đỏ', N'123123123', '0987654322', '20220501', N'Việt Nam'),
+	(N'Lão Hạc', N'123123123', '0987654333', '20230106', N'Việt Nam'),
+	(N'John Wick', N'123123123', '0987655555', '20240513', N'Nước ngoài'),
+	(N'Tony Stark', N'123123123', '0987654399', '20240206', N'Nước ngoài')
 GO
 
 -- Insert rows into table 'dbo.DichVu'
